@@ -1,6 +1,7 @@
 package pl.edu.pw.fizyka.pojava.tosbert;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
@@ -8,34 +9,34 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class RunButtonPanel extends JPanel { //Antonina Pater
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	
-	JButton fizeauButton;
-	JButton runButton;
-	Font mainFont = new Font("Liberation Sans", Font.PLAIN, 12);
-	
-	public RunButtonPanel() {
-		
-		setLayout(new BorderLayout());
-		this.setMinimumSize(new Dimension(150,120));
-		this.setMaximumSize(new Dimension(120,120));
-		this.setPreferredSize(new Dimension(250,120));
-		
-		
-		fizeauButton =new JButton("Zrób to \n jak Fizeau");
-		fizeauButton.setFont(mainFont);
-		fizeauButton.setPreferredSize(new Dimension(150, 50));
-		this.add(fizeauButton,BorderLayout.NORTH);
-		
-		runButton = new JButton ("START/ STOP");
-		runButton.setFont(mainFont);
-		runButton.setPreferredSize(new Dimension(150, 50));
-		this.add(runButton,BorderLayout.SOUTH);
-	}
+
+    JButton fizeauButton;
+    JButton runButton;
+    Font mainFont = new Font("Liberation Sans", Font.PLAIN, 12);
+
+    public RunButtonPanel() {
+
+	setLayout(new BorderLayout());
+	setMinimumSize(new Dimension(200,125));
+	setMaximumSize(new Dimension(200,125));
+	setPreferredSize(new Dimension(200,125));
+	setBackground(Color.WHITE);
+
+	this.fizeauButton =new JButton("Zrób to \n jak Fizeau");
+	this.fizeauButton.setFont(this.mainFont);
+	this.fizeauButton.setPreferredSize(new Dimension(150, 50));
+	this.add(this.fizeauButton,BorderLayout.NORTH);
+
+	this.runButton = new JButton ("START/ STOP");
+	this.runButton.setFont(this.mainFont);
+	this.runButton.setPreferredSize(new Dimension(150, 50));
+	this.add(this.runButton,BorderLayout.SOUTH);
+    }
 
 
 
