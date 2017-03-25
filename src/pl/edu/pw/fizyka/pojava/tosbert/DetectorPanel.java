@@ -9,40 +9,42 @@ import java.awt.Graphics2D;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public class DetectorPanel extends JPanel { // Hubert Nowakowski
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 1L;
 
     boolean detected;
     Font header = new Font("Liberation Sans", Font.BOLD, 12);
     JLabel detectorLabel;
-    
+
     DetectorPanel(){
-    	setLayout(new FlowLayout());
+	setLayout(new FlowLayout());
 	setMinimumSize(new Dimension(250,125));
 	setMaximumSize(new Dimension(250,125));
 	setPreferredSize(new Dimension(250,125));
 	setBackground(Color.WHITE);
-	detected=true;
-	detectorLabel= new JLabel("obraz detektora",JLabel.CENTER);
-	this.add(detectorLabel);
+	this.detected=true;
+	this.detectorLabel= new JLabel("obraz detektora",SwingConstants.CENTER);
+	this.add(this.detectorLabel);
 
     }
-    
+
+    @Override
     public void paintComponent(Graphics g ){
 	Graphics2D g2d = (Graphics2D) g;
-	
+
 	g2d.drawRect(75, 20, 100,100);
-	
-	if(detected){
+
+	if(this.detected){
 	    g2d.setColor(Color.RED);
 	    g2d.drawOval(100, 45, 50, 50);
 	    g2d.fillOval(100, 45, 50, 50);
 	}
-	
-	
+
+
     }
 }

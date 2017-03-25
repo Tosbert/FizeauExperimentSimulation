@@ -19,14 +19,14 @@ public class BottomPanel extends JPanel { //Antonina Pater
     DetectorPanel detectorPanel;
     GraphFrame graph;
 
-    
+
     public BottomPanel() throws HeadlessException {
 	setBackground(Color.WHITE);
 	setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 	setMinimumSize(new Dimension(700,150));
 	setMaximumSize(new Dimension(700,150));
 	setPreferredSize(new Dimension(700,150));
-	
+
 	this.settings = new SettingsPanel();
 	this.add(this.settings);
 
@@ -35,9 +35,9 @@ public class BottomPanel extends JPanel { //Antonina Pater
 
 	this.detectorPanel = new DetectorPanel();
 	this.add(this.detectorPanel);
-	
+
 	this.graph = new GraphFrame();
-	this.graph.setLocation(this.getX()+800, (this.getY()));
+	this.graph.setLocation(getX()+800, (getY()));
 	//this.graph.setVisible(true);
     }
 

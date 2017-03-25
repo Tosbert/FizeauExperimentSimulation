@@ -23,7 +23,7 @@ public class Frame extends JFrame { //Antonina Pater
 
     BottomPanel bottom;
     AnimationPanel animation;
-    
+
     JMenuBar menuBar;
     JMenu menu;
     JMenuItem chartMenu;
@@ -38,12 +38,12 @@ public class Frame extends JFrame { //Antonina Pater
 	setBackground(Color.WHITE);
 	setLayout(new BorderLayout());
 	setResizable(false);
-	
+
 	this.menuBar = new JMenuBar();
 	this.menu = new JMenu();
 	this.chartMenu = new JMenuItem();
 	this.timeMenu = new JMenuItem();
-	
+
 	setJMenuBar(this.menuBar);
 	this.menuBar.add(this.menu);
 	this.menu.setText("Menu");
@@ -53,17 +53,17 @@ public class Frame extends JFrame { //Antonina Pater
 	this.menu.add(this.timeMenu);
 	this.timeMenu.setText("Wybierz tempo symulacji");
 	this.timeMenu.setToolTipText("Zmień opcje czasu symulacji, by obserwować bieg promieni świetlnych");
-	
-	
+
+
 
 	this.chartMenu.addActionListener( new ActionListener() {
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
-		bottom.graph.setVisible(true);
+		Frame.this.bottom.graph.setVisible(true);
 	    }
 	} );
-	
-	
+
+
 	this.animation = new AnimationPanel();
 	this.bottom = new BottomPanel();
 
