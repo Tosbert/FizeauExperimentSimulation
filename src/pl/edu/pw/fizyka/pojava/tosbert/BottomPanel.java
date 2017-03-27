@@ -23,9 +23,9 @@ public class BottomPanel extends JPanel { //Antonina Pater
     public BottomPanel() throws HeadlessException {
 	setBackground(Color.WHITE);
 	setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-	setMinimumSize(new Dimension(700,150));
-	setMaximumSize(new Dimension(700,150));
-	setPreferredSize(new Dimension(700,150));
+	setMinimumSize(new Dimension(800,150));
+	setMaximumSize(new Dimension(800,150));
+	setPreferredSize(new Dimension(800,150));
 
 	this.settings = new SettingsPanel();
 	this.add(this.settings);

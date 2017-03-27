@@ -22,9 +22,9 @@ public class RunButtonPanel extends JPanel { //Antonina Pater
     public RunButtonPanel() {
 
 	setLayout(new BorderLayout());
-	setMinimumSize(new Dimension(200,125));
-	setMaximumSize(new Dimension(200,125));
-	setPreferredSize(new Dimension(200,125));
+	setMinimumSize(new Dimension(300,125));
+	setMaximumSize(new Dimension(300,125));
+	setPreferredSize(new Dimension(300,125));
 	setBackground(Color.WHITE);
 
 	this.fizeauButton =new JButton("Zrób to \n jak Fizeau");

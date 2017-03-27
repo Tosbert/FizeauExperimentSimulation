@@ -33,7 +33,7 @@ public class Frame extends JFrame { //Antonina Pater
 
 	super("Symulacja Efektu Fizeau");
 
-	setPreferredSize(new Dimension(730,800));
+	setPreferredSize(new Dimension(800,800));
 	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	setBackground(Color.WHITE);
 	setLayout(new BorderLayout());

@@ -26,7 +26,7 @@ public class DetectorPanel extends JPanel { // Hubert Nowakowski
 	setMinimumSize(new Dimension(250,125));
 	setMaximumSize(new Dimension(250,125));
 	setPreferredSize(new Dimension(250,125));
-	setBackground(Color.WHITE);
+	setBackground(Color.BLACK);
 	this.detected=true;
 	this.detectorLabel= new JLabel("obraz detektora",SwingConstants.CENTER);
 	this.add(this.detectorLabel);

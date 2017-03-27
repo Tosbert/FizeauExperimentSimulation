@@ -24,6 +24,7 @@ public class GraphFrame extends JFrame { //Hubert Nowakowski
     int y0 = 350;
     int yMax;
 
+
     public GraphFrame() {
 	super("tytuł wykresu");
 	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -33,50 +34,37 @@ public class GraphFrame extends JFrame { //Hubert Nowakowski
 	setBackground(Color.WHITE);
 
 	this.xMax = getWidth()-35;
-	this.yMax = getHeight()-50;
-
+	this.yMax = 50;
+	
 	this.data = new ArrayList<Point>();
-	for(int ii=0; ii<30; ii++)
-	    this.data.add(new Point((this.x0+(ii*10))-2,((this.y0-300)+ (ii*10))-2) );
-	for(int ii=0; ii<20; ii++)
-	    this.data.add(new Point((this.x0+300+(ii*10))-2,(this.y0- (ii*10))-2) );
-	/*
-	lineChart = ChartFactory.createLineChart(
-		"wykres",
-		"x","sin(x)",
-		createDataset(),
-		PlotOrientation.VERTICAL,false,false,false);
-	lineChart.setBackgroundPaint(Color.white);
-	ChartPanel chartPanel = new ChartPanel( lineChart );
-	chartPanel.setPreferredSize( new Dimension( 300 , 300) );
-	chartPanel.setBackground(Color.WHITE);
-	this.add( chartPanel );
-	}
-
-	private DefaultCategoryDataset createDataset( ){
-	    DefaultCategoryDataset dataset = new DefaultCategoryDataset( );
-	    for(int ii = 0; ii<=10; ii++)
-		dataset.addValue(  Math.sin(Math.PI*ii/5) , "x" , ""+ ii );
-	    return dataset;
-	 */
+	for(int ii=0; ii<200; ii++)
+	    this.data.add(new Point((this.x0+(ii*1))-2,((this.y0-200)+ (ii*1))-2) );
+	for(int ii=0; ii<200; ii++)
+	    this.data.add(new Point((this.x0+200+(ii*1))-2,((this.y0)- (ii*1))-2) );
 
     }
     @Override
     public void paint( Graphics g){
 
 	g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
-	g.drawString("f(\u03C9)",10,getHeight()/2);
+	g.drawString("f(\u03C9)",10,getHeight()/2); //opis osi y
 
-	g.drawLine(this.x0, this.y0-300, this.x0, this.y0); 	// Y axis
+	g.drawLine(this.x0, this.y0, this.x0, this.yMax+5); 	// Y axis
 	for(int ii=70; ii<=this.y0; ii+=10)
 	    g.drawLine(45, ii, 55, ii);
+	g.fillPolygon(new int[]{x0-5,x0,x0+5}, new int[]{yMax+10,yMax,yMax+10},3);
+	
+	
+	
+	g.drawString("\u03C9",getWidth()/2,375); //opis osi x
 
-	g.drawString("\u03C9",getWidth()/2,375);
-
-	g.drawLine(50, 350, this.xMax, this.yMax);	// X axis
+	g.drawLine(x0, this.y0, xMax-5, this.y0);	// X axis
 	for(int ii=50; ii<=(getWidth()-50); ii+=10)
 	    g.drawLine(ii, 345, ii, 355);
-
+	g.fillPolygon(new int[]{xMax-10,xMax,xMax-10}, new int[]{y0-5,y0,y0+5},3);
+	
+	
+	
 	drawData(g);
     }
     private void drawData(Graphics g) {

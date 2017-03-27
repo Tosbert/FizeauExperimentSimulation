@@ -23,6 +23,7 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
     Rectangle lightSource;
     Rectangle lightReciever;
 
+    ArrayList<Rectangle> lightBeam;
     Rectangle lightBeamBeforeWheel; //TODO temporary
     Rectangle lightBeamAfterWheel;
     Rectangle lightBeamBack;
@@ -33,9 +34,9 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 
     AnimationPanel(){
 	super();
-	setMinimumSize(new Dimension(700,400));
-	setMaximumSize(new Dimension(700,400));
-	setPreferredSize(new Dimension(700,400));
+	setMinimumSize(new Dimension(800,650));
+	setMaximumSize(new Dimension(800,650));
+	setPreferredSize(new Dimension(800,650));
 	setBackground(Color.WHITE);
 
 	this.wheel = new Rectangle( 250 , 60 , 11 , 200);
@@ -51,39 +52,38 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 		(int) ( this.wheel.getMaxY()-1 - ( this.wheel.getY()+30+20+50+20+50+20 ) )
 		));
 
-	int d = 350; //TODO calculate distance from the settings
+	int d = 400; //TODO calculate distance from the settings
 	this.fullMirror = new Rectangle( (int)(this.wheel.getX()+d) , (int)( this.wheel.getY()) ,15 , 200 );
 
 	this.partialMirror = new Rectangle( (int)(this.wheel.getX()-50) , (int)( this.wheel.getY())-100 ,20 , 100 );
 
 	this.lightSource = new Rectangle( 10 , ((int)( this.wheel.getMaxY() + this.wheel.getY() )/2) -15 ,40 , 30 );
 
+	this.lightReciever = new Rectangle(
+		(int)this.wheel.getX()-115,
+		(int)this.wheel.getY()+250,
+		30 , 45);
+	
 	this.lightBeamBeforeWheel = new Rectangle(
 		(int)this.lightSource.getX(),
-		((int)( this.wheel.getMaxY() + this.wheel.getY() )/2) -5,
+		((int)( this.lightSource.getY() + this.lightSource.getWidth()/2 -5)) -5,
 		(int)( this.wheel.getX()- this.lightSource.getX() ) ,
 		4 );
 
-	this.lightBeamAfterWheel = new Rectangle(
-		(int)this.wheel.getX()+100,
-		((int)( this.wheel.getMaxY() + this.wheel.getY() )/2) -5,
-		(int)( this.fullMirror.getX() - (this.wheel.getX()+100) ) ,
-		4 );
-
-	this.lightBeamBack = new Rectangle(
-		(int)this.wheel.getX()-105,
-		(int)( this.wheel.getMaxY() + this.wheel.getY() )/2,
-		(int)( this.fullMirror.getX()- (this.wheel.getX()-105 ) ) ,
-		4 );
-
-	this.lightReciever = new Rectangle(
-		(int)this.lightBeamBack.getX()-15,
-		(int)this.lightBeamBack.getY()+150,
-		30 , 45);
-
+	this.lightBeam = new ArrayList<Rectangle>();
+	
+	//light beam after wheel
+	for(int ii=(int)(this.wheel.getX()+this.wheel.getWidth())+100;ii<=this.fullMirror.getX();ii+=5){
+	    this.lightBeam.add( new Rectangle(ii,(int)( this.wheel.getMaxY() + this.wheel.getY() )/2-5,5,4) );
+	}
+	//light beam back from mirror
+	for(int ii=(int)(this.fullMirror.getX())-5;ii>=(int)(this.lightReciever.getX()+this.lightReciever.getWidth()/2);ii-=5){
+	    this.lightBeam.add( new Rectangle(ii,(int)( this.wheel.getMaxY() + this.wheel.getY() )/2,5,4) );
+	}
+	
 	this.lightBeamToReciever = new Rectangle(
-		(int)this.lightBeamBack.getX(),
-		(int)this.lightBeamBack.getY(),
+		(int)(this.lightReciever.getX()+this.lightReciever.getWidth()/2),
+		(int)(this.wheel.getMaxY() + this.wheel.getY() )/2,
 		4,
 		150
 		);
@@ -116,8 +116,12 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 	g2d.setColor(Color.RED);
 	g2d.fill(this.lightBeamBeforeWheel);
 
-	g2d.fill(this.lightBeamAfterWheel);
-	g2d.fill(this.lightBeamBack);
+	for(Rectangle r : this.lightBeam){
+	    // TODO check if beam is reflected by mirror or stopped by wheel
+	    g2d.fill(r);
+	}
+	
+	//g2d.fill(this.lightBeamBack);
 	g2d.fill(this.lightBeamToReciever);
 
 

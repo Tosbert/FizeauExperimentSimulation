@@ -25,9 +25,9 @@ public class SettingsPanel extends JPanel { //Antonina Pater, Hubert Nowakowski
     JLabel teethLabel;
     JComboBox<String> distance;
     JLabel distanceLabel;
-    JSlider velocitySlider;
-    JLabel velocitySliderLabel;
-    JLabel vLabel;
+    JSlider velSlider;
+    JLabel velSliderLabel;
+    JLabel velLabel;
     Font mainFont = new Font("Liberation Sans", Font.PLAIN, 12);
     Font header = new Font("Liberation Sans", Font.BOLD, 12);
 
@@ -62,20 +62,23 @@ public class SettingsPanel extends JPanel { //Antonina Pater, Hubert Nowakowski
 	this.add(this.distance);
 
 
-	this.velocitySliderLabel = new JLabel("Prędkośc obrotu koła: ");
-	this.velocitySliderLabel.setFont(this.mainFont);
-	this.add(this.velocitySliderLabel);
-	this.velocitySlider = new JSlider(0,10000,0);
-	this.velocitySlider.setBackground(Color.WHITE);
+	this.velSliderLabel = new JLabel("Prędkośc obrotu koła: ");
+	this.velSliderLabel.setFont(this.mainFont);
+	this.add(this.velSliderLabel);
+	this.velSlider = new JSlider(0,10000,0);
+	this.velSlider.setBackground(Color.WHITE);
+	
+	velSlider.setMinorTickSpacing(10);
+	velSlider.setSnapToTicks(true);
 
-	this.add(this.velocitySlider);
-	this.vLabel = new JLabel(" ");
-	this.vLabel.setFont(this.mainFont);
-	this.add(this.vLabel);
-	this.velocitySlider.addChangeListener( new ChangeListener() {
+	this.add(this.velSlider);
+	this.velLabel = new JLabel(" ");
+	this.velLabel.setFont(this.mainFont);
+	this.add(this.velLabel);
+	this.velSlider.addChangeListener( new ChangeListener() {
 	    @Override
 	    public void stateChanged(ChangeEvent ce) {
-		SettingsPanel.this.vLabel.setText( Integer.toString(SettingsPanel.this.velocitySlider.getValue()) );
+		SettingsPanel.this.velLabel.setText( Integer.toString(SettingsPanel.this.velSlider.getValue()) );
 	    }
 	});
 
