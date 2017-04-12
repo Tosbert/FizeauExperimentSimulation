@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 public class Frame extends JFrame { //Antonina Pater
 
@@ -32,12 +34,24 @@ public class Frame extends JFrame { //Antonina Pater
     public Frame() throws HeadlessException {
 
 	super("Symulacja Efektu Fizeau");
+	
+	try {
+		UIManager.setLookAndFeel(
+	            UIManager.getSystemLookAndFeelClassName());
+		
+	} catch (Exception e1) {
+		
+		e1.printStackTrace();
+		System.out.println("błąd LF");
+	;
+	}
+	 SwingUtilities.updateComponentTreeUI(Frame.this);
 
-	setPreferredSize(new Dimension(800,800));
+	setPreferredSize(new Dimension(800,700));
 	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	setBackground(Color.WHITE);
 	setLayout(new BorderLayout());
-	setResizable(false);
+
 
 	this.menuBar = new JMenuBar();
 	this.menu = new JMenu();
