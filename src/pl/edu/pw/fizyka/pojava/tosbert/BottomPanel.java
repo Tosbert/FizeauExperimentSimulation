@@ -2,9 +2,9 @@ package pl.edu.pw.fizyka.pojava.tosbert;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.HeadlessException;
 
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 public class BottomPanel extends JPanel { //Antonina Pater
@@ -22,10 +22,11 @@ public class BottomPanel extends JPanel { //Antonina Pater
 
     public BottomPanel() throws HeadlessException {
 	setBackground(Color.WHITE);
-	setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-	setMinimumSize(new Dimension(800,150));
-	setMaximumSize(new Dimension(800,150));
-	setPreferredSize(new Dimension(800,150));
+	
+	this.setLayout(new GridLayout(1,3,3,3));
+	
+
+	setPreferredSize(new Dimension(800,130));
 
 	this.settings = new SettingsPanel();
 	this.add(this.settings);

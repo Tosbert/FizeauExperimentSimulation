@@ -2,49 +2,45 @@ package pl.edu.pw.fizyka.pojava.tosbert;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
-public class DetectorPanel extends JPanel { // Hubert Nowakowski
+public class DetectorPanel extends JPanel { // Hubert Nowakowski, Antonina Pater
     /**
      *
      */
     private static final long serialVersionUID = 1L;
 
-    boolean detected;
+    JPanel detectorImage;
     Font header = new Font("Liberation Sans", Font.BOLD, 12);
     JLabel detectorLabel;
 
-    DetectorPanel(){
-	setLayout(new FlowLayout());
-	setMinimumSize(new Dimension(250,125));
-	setMaximumSize(new Dimension(250,125));
-	setPreferredSize(new Dimension(250,125));
-	setBackground(Color.BLACK);
-	this.detected=true;
-	this.detectorLabel= new JLabel("obraz detektora",SwingConstants.CENTER);
-	this.add(this.detectorLabel);
+    public DetectorPanel(){
+    this.setLayout(new GridBagLayout());
+    GridBagConstraints c = new GridBagConstraints();
+	setPreferredSize(new Dimension(250,130));
+	setBackground(Color.WHITE);
+	
+	this.detectorLabel= new JLabel("OBRAZ DETEKTORA");
+	c.gridx = 0;
+	c.gridy = 0;
+	c.anchor=GridBagConstraints.PAGE_START;
+	detectorLabel.setFont(header);
+	this.add(this.detectorLabel,c);
+	
+	this.detectorImage = new DetectorImage();
+	c.gridx = 0;
+	c.gridy = 1; 
+	c.insets = new Insets(5,0,5,0);
+	c.anchor=GridBagConstraints.PAGE_START; 
+	this.add(this.detectorImage,c);
 
     }
 
-    @Override
-    public void paintComponent(Graphics g ){
-	Graphics2D g2d = (Graphics2D) g;
-
-	g2d.drawRect(75, 20, 100,100);
-
-	if(this.detected){
-	    g2d.setColor(Color.RED);
-	    g2d.drawOval(100, 45, 50, 50);
-	    g2d.fillOval(100, 45, 50, 50);
-	}
-
-
-    }
 }
+
