@@ -1,5 +1,7 @@
 package pl.edu.pw.fizyka.pojava.tosbert;
 
+import static java.util.concurrent.TimeUnit.*;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -8,8 +10,11 @@ import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 public class AnimationPanel extends JPanel { // Hubert Nowakowski
 
@@ -18,20 +23,20 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
      */
     private static final long serialVersionUID = 1L;
 
-    ArrayList<Rectangle> wheelTeeth;
+    ArrayList<WheelTooth> wheelTeeth;
+    ArrayList<Rectangle> lightBeam;
+    
+    
     Rectangle wheel;
     Rectangle lightSource;
     Rectangle lightReciever;
-
-    ArrayList<Rectangle> lightBeam;
-    Rectangle lightBeamBeforeWheel; //TODO temporary
-    Rectangle lightBeamAfterWheel;
-    Rectangle lightBeamBack;
-    Rectangle lightBeamToReciever;
-
     Rectangle fullMirror;
     Rectangle partialMirror;
+    
+    Rectangle lightBeamBeforeWheel; //always visible
+    Rectangle lightBeamToReciever;
 
+    
     AnimationPanel(){
 	super();
 	setMinimumSize(new Dimension(800,650));
@@ -41,18 +46,18 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 
 	this.wheel = new Rectangle( 250 , 60 , 11 , 200);
 
-	this.wheelTeeth = new ArrayList<Rectangle>();
+	this.wheelTeeth = new ArrayList<WheelTooth>();
 
+	int n = 1000; //TODO set number of teeth from settings
+	int R = 10000;
+	int height = (int) (R*Math.PI/n);
+	
+	for(int ii=0; ii< wheel.getHeight(); ii+=2*height){
+	    this.wheelTeeth.add(new WheelTooth( this.wheel,(int)this.wheel.getX(), 
+		    		(int)this.wheel.getY()+ii, (int)this.wheel.getWidth(), height) );
+	}
 
-	this.wheelTeeth.add(new Rectangle( (int)this.wheel.getX() , (int)this.wheel.getY(), 10, 30) );
-	this.wheelTeeth.add(new Rectangle( (int)this.wheel.getX() , (int)this.wheel.getY()+30+20, 10, 50) );
-	this.wheelTeeth.add(new Rectangle( (int)this.wheel.getX() , (int)this.wheel.getY()+30+20+50+20, 10, 50) );
-	this.wheelTeeth.add(new Rectangle(
-		(int)this.wheel.getX() , (int)this.wheel.getY()+30+20+50+20+50+20,10,
-		(int) ( this.wheel.getMaxY()-1 - ( this.wheel.getY()+30+20+50+20+50+20 ) )
-		));
-
-	int d = 400; //TODO calculate distance from the settings
+	int d = 400; //TODO set distance from the settings
 	this.fullMirror = new Rectangle( (int)(this.wheel.getX()+d) , (int)( this.wheel.getY()) ,15 , 200 );
 
 	this.partialMirror = new Rectangle( (int)(this.wheel.getX()-50) , (int)( this.wheel.getY())-100 ,20 , 100 );
@@ -72,6 +77,7 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 
 	this.lightBeam = new ArrayList<Rectangle>();
 	
+				//TODO animate light and detect collisions	
 	//light beam after wheel
 	for(int ii=(int)(this.wheel.getX()+this.wheel.getWidth())+100;ii<=this.fullMirror.getX();ii+=5){
 	    this.lightBeam.add( new Rectangle(ii,(int)( this.wheel.getMaxY() + this.wheel.getY() )/2-5,5,4) );
@@ -84,11 +90,7 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 	this.lightBeamToReciever = new Rectangle(
 		(int)(this.lightReciever.getX()+this.lightReciever.getWidth()/2),
 		(int)(this.wheel.getMaxY() + this.wheel.getY() )/2,
-		4,
-		150
-		);
-
-
+		4,150);
     }
 
     @Override
@@ -117,13 +119,10 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 	g2d.fill(this.lightBeamBeforeWheel);
 
 	for(Rectangle r : this.lightBeam){
-	    // TODO check if beam is reflected by mirror or stopped by wheel
 	    g2d.fill(r);
 	}
 	
-	//g2d.fill(this.lightBeamBack);
-	g2d.fill(this.lightBeamToReciever);
-
+	g2d.fill(this.lightBeamToReciever); //TODO Add lightBeamToReciever to the general lightBeam array
 
 	g2d.setColor(new Color(0,59,111));
 	g2d.draw(this.lightSource);
@@ -135,7 +134,6 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 
 	g2d.setColor(Color.BLACK);
 	for(Rectangle r : this.wheelTeeth){
-	    // TODO move rectangle and check if left the wheel area -> adjust height
 	    g2d.draw(r);
 	    g2d.fill(r);
 	}

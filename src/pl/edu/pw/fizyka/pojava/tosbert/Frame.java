@@ -12,9 +12,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 
-public class Frame extends JFrame { //Antonina Pater
+public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 
     /**
      *
@@ -43,9 +44,8 @@ public class Frame extends JFrame { //Antonina Pater
 		
 		e1.printStackTrace();
 		System.out.println("błąd LF");
-	;
 	}
-	 SwingUtilities.updateComponentTreeUI(Frame.this);
+	SwingUtilities.updateComponentTreeUI(Frame.this);
 
 	setPreferredSize(new Dimension(800,700));
 	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -88,10 +88,9 @@ public class Frame extends JFrame { //Antonina Pater
 
 
     public static void main(String[] args) {
-
+	
 	Frame frame = new Frame();
 	frame.setVisible(true);
-
+	
     }
-
 }
