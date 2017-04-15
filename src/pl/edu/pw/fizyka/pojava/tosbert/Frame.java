@@ -12,7 +12,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 
 public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
@@ -48,7 +47,7 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 	SwingUtilities.updateComponentTreeUI(Frame.this);
 
 	setPreferredSize(new Dimension(800,700));
-	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+	setDefaultCloseOperation(EXIT_ON_CLOSE);
 	setBackground(Color.WHITE);
 	setLayout(new BorderLayout());
 
@@ -69,7 +68,6 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 	this.timeMenu.setToolTipText("Zmień opcje czasu symulacji, by obserwować bieg promieni świetlnych");
 
 
-
 	this.chartMenu.addActionListener( new ActionListener() {
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
@@ -78,19 +76,31 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 	} );
 
 
-	this.animation = new AnimationPanel();
+	this.animation = new AnimationPanel(0,400,700);
+
+	
 	this.bottom = new BottomPanel();
 
 	this.add(this.animation, BorderLayout.CENTER);
 	this.add(this.bottom, BorderLayout.SOUTH);
 	pack();
+	
+	this.bottom.runButtonPanel.runButton.addActionListener(new RunButtonListener(this));
+	this.bottom.settings.velSlider.addChangeListener(new SliderListener(this));
+	this.bottom.settings.distance.addItemListener(new DistanceListener(this));
+	//this.bottom.settings.nTeeth.addItemListener(new ToothListener(this));
     }
 
 
     public static void main(String[] args) {
-	
-	Frame frame = new Frame();
-	frame.setVisible(true);
+	SwingUtilities.invokeLater(new Runnable() {
+	    @Override
+	    public void run() {
+		Frame frame = new Frame();
+		frame.setVisible(true);
+		
+	      }
+	    });
 	
     }
 }

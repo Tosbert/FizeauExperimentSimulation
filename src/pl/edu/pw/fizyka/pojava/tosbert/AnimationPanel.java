@@ -1,15 +1,15 @@
 package pl.edu.pw.fizyka.pojava.tosbert;
 
-import static java.util.concurrent.TimeUnit.*;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -23,9 +23,17 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
      */
     private static final long serialVersionUID = 1L;
 
+    boolean animationRunning;
+    int vel;
+    int n;
+    int d;
+    final int R = 10000;
+    
+    ScheduledExecutorService scheduler;
+    
+    Collection<Rectangle> movingObjects;
     ArrayList<WheelTooth> wheelTeeth;
     ArrayList<Rectangle> lightBeam;
-    
     
     Rectangle wheel;
     Rectangle lightSource;
@@ -37,27 +45,39 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
     Rectangle lightBeamToReciever;
 
     
-    AnimationPanel(){
+    AnimationPanel(int vel ,int n ,int d){
 	super();
-	setMinimumSize(new Dimension(800,650));
-	setMaximumSize(new Dimension(800,650));
-	setPreferredSize(new Dimension(800,650));
+	this.vel=vel;
+	this.n=n;
+	this.d=d;
 	setBackground(Color.WHITE);
 
-	this.wheel = new Rectangle( 250 , 60 , 11 , 200);
+	animationRunning = false;
 
-	this.wheelTeeth = new ArrayList<WheelTooth>();
-
-	int n = 1000; //TODO set number of teeth from settings
-	int R = 10000;
+	
+	movingObjects = new ArrayList<Rectangle>();
+	
 	int height = (int) (R*Math.PI/n);
 	
-	for(int ii=0; ii< wheel.getHeight(); ii+=2*height){
-	    this.wheelTeeth.add(new WheelTooth( this.wheel,(int)this.wheel.getX(), 
-		    		(int)this.wheel.getY()+ii, (int)this.wheel.getWidth(), height) );
+	this.wheel = new Rectangle( 250 , 60 , 11 , 200);
+	
+	this.wheelTeeth = new ArrayList<WheelTooth>();
+	
+	
+	
+	for(int ii=0; ii< (wheel.getHeight()+4*height); ii+=2*height){
+	    this.wheelTeeth.add(new WheelTooth(
+		    this.wheel,
+		    (int)this.wheel.getX(),
+		    (int)this.wheel.getY()+ii,
+		    (int)this.wheel.getWidth(),
+		    50) );
 	}
+	
+	
+	this.movingObjects.addAll(wheelTeeth);
 
-	int d = 400; //TODO set distance from the settings
+	
 	this.fullMirror = new Rectangle( (int)(this.wheel.getX()+d) , (int)( this.wheel.getY()) ,15 , 200 );
 
 	this.partialMirror = new Rectangle( (int)(this.wheel.getX()-50) , (int)( this.wheel.getY())-100 ,20 , 100 );
@@ -78,10 +98,12 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 	this.lightBeam = new ArrayList<Rectangle>();
 	
 				//TODO animate light and detect collisions	
+	
 	//light beam after wheel
 	for(int ii=(int)(this.wheel.getX()+this.wheel.getWidth())+100;ii<=this.fullMirror.getX();ii+=5){
 	    this.lightBeam.add( new Rectangle(ii,(int)( this.wheel.getMaxY() + this.wheel.getY() )/2-5,5,4) );
 	}
+	
 	//light beam back from mirror
 	for(int ii=(int)(this.fullMirror.getX())-5;ii>=(int)(this.lightReciever.getX()+this.lightReciever.getWidth()/2);ii-=5){
 	    this.lightBeam.add( new Rectangle(ii,(int)( this.wheel.getMaxY() + this.wheel.getY() )/2,5,4) );
@@ -91,6 +113,9 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 		(int)(this.lightReciever.getX()+this.lightReciever.getWidth()/2),
 		(int)(this.wheel.getMaxY() + this.wheel.getY() )/2,
 		4,150);
+	
+	this.movingObjects.addAll(lightBeam);
+	
     }
 
     @Override
@@ -118,10 +143,7 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 	g2d.setColor(Color.RED);
 	g2d.fill(this.lightBeamBeforeWheel);
 
-	for(Rectangle r : this.lightBeam){
-	    g2d.fill(r);
-	}
-	
+		
 	g2d.fill(this.lightBeamToReciever); //TODO Add lightBeamToReciever to the general lightBeam array
 
 	g2d.setColor(new Color(0,59,111));
@@ -131,13 +153,68 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 	g2d.setColor(new Color(0,59,111));
 	g2d.draw(this.lightReciever);
 	g2d.fill(this.lightReciever);
-
-	g2d.setColor(Color.BLACK);
-	for(Rectangle r : this.wheelTeeth){
-	    g2d.draw(r);
-	    g2d.fill(r);
+	
+	for(Rectangle r : movingObjects){
+	    if(r.getClass()==WheelTooth.class){
+		g2d.setColor( Color.BLACK );
+		g2d.draw(r);
+		g2d.fill(r);
+	    }
+	    else
+	    {
+		g2d.setColor(Color.RED);
+		g2d.fill(r);
+	    }
 	}
+	g2d.setColor(Color.WHITE);
+	g2d.fill(new Rectangle((int)wheel.getX()-5,(int)(wheel.getY()+wheel.getHeight()),
+		(int)(wheel.getWidth())+10,this.getHeight() - (int)(wheel.getY()+wheel.getHeight()) ));
+	g2d.fill(new Rectangle((int)wheel.getX()-5,(int)wheel.getY()-100,
+		(int)(wheel.getWidth())+10,100));
+
 
     }
 
+    void startAnimation(){
+	scheduler = Executors.newScheduledThreadPool(1);
+	scheduler.scheduleAtFixedRate( (new Runnable() {
+	    @Override
+	    public void run(){
+		
+		boolean rotate = false;
+		int lastToothY = wheelTeeth.get(wheelTeeth.size()-1).y;
+
+		for(WheelTooth t : wheelTeeth)
+		{
+		    if(lastToothY != t.moveTooth(vel,lastToothY)) {
+			rotate = true; 
+			lastToothY = t.moveTooth(vel,lastToothY);
+		    }
+		}
+		if(rotate){
+		    wheelTeeth.add(wheelTeeth.remove(0)); 
+		}
+
+		SwingUtilities.invokeLater(new Runnable(){
+		    @Override
+		    public void run(){
+			repaint();
+			}
+		    });
+		}	        
+	    }),  0, 1, MILLISECONDS);
+    }
+    
+    void stopAnimation(){
+	scheduler.shutdown();
+    }
+
+    public void setVel(int vel) { this.vel = vel; }
+    
+    public void setN(int n) {this.n = n; }
+    
+    public void setD(int d) { this.d = d; }
+    
+    
+    
 }

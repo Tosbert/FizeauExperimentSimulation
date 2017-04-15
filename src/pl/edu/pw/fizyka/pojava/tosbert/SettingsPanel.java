@@ -23,9 +23,9 @@ public class SettingsPanel extends JPanel { //Antonina Pater, Hubert Nowakowski
 
 
     JLabel settingsLabel;
-    JComboBox<String> nTeeth;
+    JComboBox<Integer> nTeeth;
     JLabel teethLabel;
-    JComboBox<String> distance;
+    JComboBox<Integer> distance;
     JLabel distanceLabel;
     JSlider velSlider;
     JLabel velSliderLabel;
@@ -55,13 +55,12 @@ public class SettingsPanel extends JPanel { //Antonina Pater, Hubert Nowakowski
 		c.anchor=GridBagConstraints.LINE_START;
 		this.teethLabel.setFont(this.mainFont);
 		this.add(this.teethLabel,c);
-		String[] teeth = {"600", "500", "700", "800"};
-		this.nTeeth = new JComboBox<String>(teeth);
+		Integer[] teeth = {600, 500, 700, 800};
+		this.nTeeth = new JComboBox<Integer>(teeth);
 		c.gridx = 2;
 		c.gridy = 1;
 		c.anchor=GridBagConstraints.LINE_END;
 		this.nTeeth.setFont(this.mainFont);
-		this.nTeeth.addActionListener(this.nTeeth);
 		this.add(this.nTeeth,c);
 	
 		this.distanceLabel = new JLabel("Odległość od lustra: ");
@@ -71,13 +70,13 @@ public class SettingsPanel extends JPanel { //Antonina Pater, Hubert Nowakowski
 		c.anchor=GridBagConstraints.LINE_START;	
 		this.distanceLabel.setFont(this.mainFont);
 		this.add(this.distanceLabel,c);
-		String[] dist = {"600", "500", "700", "800"};
-		this.distance = new JComboBox<String>(dist);
+		Integer[] dist = {600, 500, 700, 800};
+		this.distance = new JComboBox<Integer>(dist);
 		c.gridx = 2;
 		c.gridy = 2;
 		c.anchor=GridBagConstraints.LINE_END;
 		this.distance.setFont(this.mainFont);
-		this.distance.addActionListener(this.distance);
+		//this.distance.addActionListener(this.distance);
 		this.add(this.distance,c);
 	
 	
@@ -87,6 +86,14 @@ public class SettingsPanel extends JPanel { //Antonina Pater, Hubert Nowakowski
 		c.anchor=GridBagConstraints.LINE_START;	
 		this.velSliderLabel.setFont(this.mainFont);
 		this.add(this.velSliderLabel,c);
+		
+		this.velLabel = new JLabel("0");
+		this.velLabel.setFont(this.mainFont);
+		c.gridx = 1;
+		c.gridy = 3;
+		c.anchor=GridBagConstraints.LINE_END;	
+		this.add(this.velLabel,c);
+		
 		this.velSlider = new JSlider(0,10000,0);
 		c.gridx = 0;
 		c.gridy = 4;
@@ -95,12 +102,13 @@ public class SettingsPanel extends JPanel { //Antonina Pater, Hubert Nowakowski
 		c.fill= GridBagConstraints.HORIZONTAL;
 		c.anchor=GridBagConstraints.LINE_END;	
 		
-		velSlider.setMinorTickSpacing(10);
-		velSlider.setSnapToTicks(true);
+		velSlider.setBackground(Color.WHITE);
+	
+		velSlider.setMajorTickSpacing(1);
+		velSlider.setSnapToTicks(false);
 		this.add(this.velSlider,c);
 
 	
-
     }
 
 

@@ -15,7 +15,7 @@ public class BottomPanel extends JPanel { //Antonina Pater
     private static final long serialVersionUID = 1L;
 
     SettingsPanel settings;
-    RunButtonPanel runButton;
+    RunButtonPanel runButtonPanel;
     DetectorPanel detectorPanel;
     GraphFrame graph;
 
@@ -31,8 +31,8 @@ public class BottomPanel extends JPanel { //Antonina Pater
 	this.settings = new SettingsPanel();
 	this.add(this.settings);
 
-	this.runButton = new RunButtonPanel();
-	this.add(this.runButton);
+	this.runButtonPanel = new RunButtonPanel();
+	this.add(this.runButtonPanel);
 
 	this.detectorPanel = new DetectorPanel();
 	this.add(this.detectorPanel);
