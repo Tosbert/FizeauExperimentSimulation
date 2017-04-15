@@ -5,10 +5,10 @@ import java.awt.Rectangle;
 public class WheelTooth extends Rectangle {
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 1L;
-    
+
     Rectangle wheel;
     int maxHeight;
     int height;
@@ -20,13 +20,13 @@ public class WheelTooth extends Rectangle {
 	this.height = height;
 	this.width = width;
     }
-    
-    int moveTooth(int vel, int lastToothY){ 
-	y-=vel%(2*maxHeight);
-	if( y<wheel.getY()-maxHeight ){ 
-	    this.y= lastToothY+2*maxHeight;
-	    return y;  
-	}   
+
+    int moveTooth(int vel, int lastToothY){
+	this.y-=vel%(2*this.maxHeight);
+	if( this.y<(this.wheel.getY()-this.maxHeight) ){
+	    this.y= lastToothY+(2*this.maxHeight);
+	    return this.y;
+	}
 	return lastToothY;
     }
 

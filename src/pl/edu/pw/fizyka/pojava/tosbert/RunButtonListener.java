@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 public class RunButtonListener implements ActionListener{
     Frame frame;
-    
+
     public RunButtonListener(Frame frame) {
 	this.frame = frame;
     }
@@ -16,12 +16,12 @@ public class RunButtonListener implements ActionListener{
 	if(this.frame.animation.animationRunning) {
 	    this.frame.animation.animationRunning = false;
 	    System.out.println("Animation stopped.");
-	    frame.animation.stopAnimation();
+	    this.frame.animation.stopAnimation();
 	}
 	else{
 	    this.frame.animation.animationRunning = true;
 	    System.out.println("Animation started.");
-	    frame.animation.startAnimation();
+	    this.frame.animation.startAnimation();
 	}
     }
 

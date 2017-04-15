@@ -23,7 +23,7 @@ public class RunButtonPanel extends JPanel { //Antonina Pater
 
     public RunButtonPanel() {
 
-    this.setLayout(new GridBagLayout());
+	setLayout(new GridBagLayout());
 	GridBagConstraints c = new GridBagConstraints();
 	setPreferredSize(new Dimension(300,125));
 	setBackground(Color.WHITE);
@@ -39,7 +39,7 @@ public class RunButtonPanel extends JPanel { //Antonina Pater
 	this.runButton = new JButton ("START/ STOP");
 	c.gridx = 0;
 	c.gridy = 1;
-	c.insets = new Insets(10,0,0,0); 
+	c.insets = new Insets(10,0,0,0);
 	c.anchor=GridBagConstraints.PAGE_END;
 	this.runButton.setFont(this.mainFont);
 	this.runButton.setPreferredSize(new Dimension(200, 50));

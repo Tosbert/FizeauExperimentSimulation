@@ -21,23 +21,23 @@ public class DetectorPanel extends JPanel { // Hubert Nowakowski, Antonina Pater
     JLabel detectorLabel;
 
     public DetectorPanel(){
-    this.setLayout(new GridBagLayout());
-    GridBagConstraints c = new GridBagConstraints();
+	setLayout(new GridBagLayout());
+	GridBagConstraints c = new GridBagConstraints();
 	setPreferredSize(new Dimension(250,130));
 	setBackground(Color.WHITE);
-	
+
 	this.detectorLabel= new JLabel("OBRAZ DETEKTORA");
 	c.gridx = 0;
 	c.gridy = 0;
 	c.anchor=GridBagConstraints.PAGE_START;
-	detectorLabel.setFont(header);
+	this.detectorLabel.setFont(this.header);
 	this.add(this.detectorLabel,c);
-	
+
 	this.detectorImage = new DetectorImage();
 	c.gridx = 0;
-	c.gridy = 1; 
+	c.gridy = 1;
 	c.insets = new Insets(5,0,5,0);
-	c.anchor=GridBagConstraints.PAGE_START; 
+	c.anchor=GridBagConstraints.PAGE_START;
 	this.add(this.detectorImage,c);
 
     }

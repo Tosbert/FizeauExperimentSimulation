@@ -35,7 +35,7 @@ public class GraphFrame extends JFrame { //Hubert Nowakowski
 
 	this.xMax = getWidth()-35;
 	this.yMax = 50;
-	
+
 	this.data = new ArrayList<Point>();
 	for(int ii=0; ii<200; ii++)
 	    this.data.add(new Point((this.x0+(ii*1))-2,((this.y0-200)+ (ii*1))-2) );
@@ -52,19 +52,19 @@ public class GraphFrame extends JFrame { //Hubert Nowakowski
 	g.drawLine(this.x0, this.y0, this.x0, this.yMax+5); 	// Y axis
 	for(int ii=70; ii<=this.y0; ii+=10)
 	    g.drawLine(45, ii, 55, ii);
-	g.fillPolygon(new int[]{x0-5,x0,x0+5}, new int[]{yMax+10,yMax,yMax+10},3);
-	
-	
-	
+	g.fillPolygon(new int[]{this.x0-5,this.x0,this.x0+5}, new int[]{this.yMax+10,this.yMax,this.yMax+10},3);
+
+
+
 	g.drawString("\u03C9",getWidth()/2,375); //opis osi x
 
-	g.drawLine(x0, this.y0, xMax-5, this.y0);	// X axis
+	g.drawLine(this.x0, this.y0, this.xMax-5, this.y0);	// X axis
 	for(int ii=50; ii<=(getWidth()-50); ii+=10)
 	    g.drawLine(ii, 345, ii, 355);
-	g.fillPolygon(new int[]{xMax-10,xMax,xMax-10}, new int[]{y0-5,y0,y0+5},3);
-	
-	
-	
+	g.fillPolygon(new int[]{this.xMax-10,this.xMax,this.xMax-10}, new int[]{this.y0-5,this.y0,this.y0+5},3);
+
+
+
 	drawData(g);
     }
     private void drawData(Graphics g) {

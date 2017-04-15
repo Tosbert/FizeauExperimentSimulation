@@ -12,14 +12,12 @@ public class DistanceListener implements ItemListener{
     @Override
     public void itemStateChanged(ItemEvent e) {
 	if (e.getStateChange() == ItemEvent.SELECTED) {
-            // assume single selection
-            int d = (Integer)e.getItemSelectable().getSelectedObjects()[0];
-            this.frame.animation.setD(d);
-            this.frame.animation.fullMirror.x=(int)this.frame.animation.wheel.getX()+d;
+	    int d = (Integer)e.getItemSelectable().getSelectedObjects()[0];
+	    this.frame.animation.setD(d);
+	    this.frame.animation.fullMirror.x=(int)this.frame.animation.wheel.getX()+d;
 
-            this.frame.animation.repaint();
-           // System.out.println("Selected [" + d + "]");
-        }
-    } 
+	    this.frame.animation.repaint();
+	}
+    }
 
 }

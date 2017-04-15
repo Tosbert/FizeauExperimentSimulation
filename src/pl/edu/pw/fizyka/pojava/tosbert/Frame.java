@@ -34,19 +34,19 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
     public Frame() throws HeadlessException {
 
 	super("Symulacja Efektu Fizeau");
-	
+
 	try {
-		UIManager.setLookAndFeel(
-	            UIManager.getSystemLookAndFeelClassName());
-		
+	    UIManager.setLookAndFeel(
+		    UIManager.getSystemLookAndFeelClassName());
+
 	} catch (Exception e1) {
-		
-		e1.printStackTrace();
-		System.out.println("błąd LF");
+
+	    e1.printStackTrace();
+	    System.out.println("błąd LF");
 	}
 	SwingUtilities.updateComponentTreeUI(Frame.this);
 
-	setPreferredSize(new Dimension(800,700));
+	setPreferredSize(new Dimension(1200,900));
 	setDefaultCloseOperation(EXIT_ON_CLOSE);
 	setBackground(Color.WHITE);
 	setLayout(new BorderLayout());
@@ -76,15 +76,15 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 	} );
 
 
-	this.animation = new AnimationPanel(0,400,700);
+	this.animation = new AnimationPanel(0,600,600);
 
-	
+
 	this.bottom = new BottomPanel();
 
 	this.add(this.animation, BorderLayout.CENTER);
 	this.add(this.bottom, BorderLayout.SOUTH);
 	pack();
-	
+
 	this.bottom.runButtonPanel.runButton.addActionListener(new RunButtonListener(this));
 	this.bottom.settings.velSlider.addChangeListener(new SliderListener(this));
 	this.bottom.settings.distance.addItemListener(new DistanceListener(this));
@@ -98,9 +98,8 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 	    public void run() {
 		Frame frame = new Frame();
 		frame.setVisible(true);
-		
-	      }
-	    });
-	
+	    }
+	});
+
     }
 }

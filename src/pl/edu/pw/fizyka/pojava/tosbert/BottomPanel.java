@@ -22,9 +22,9 @@ public class BottomPanel extends JPanel { //Antonina Pater
 
     public BottomPanel() throws HeadlessException {
 	setBackground(Color.WHITE);
-	
-	this.setLayout(new GridLayout(1,3,3,3));
-	
+
+	setLayout(new GridLayout(1,3,3,3));
+
 
 	setPreferredSize(new Dimension(800,130));
 
