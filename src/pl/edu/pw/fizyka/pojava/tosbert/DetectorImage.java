@@ -26,7 +26,7 @@ public class DetectorImage extends JPanel { //Hubert Nowakowski
 	Graphics2D g2d = (Graphics2D) g;
 
 
-	g2d.setColor(Color.GRAY);
+	g2d.setColor(Color.LIGHT_GRAY);
 	g2d.drawRect(0, 0, 100,100);
 
 	if(this.detected){

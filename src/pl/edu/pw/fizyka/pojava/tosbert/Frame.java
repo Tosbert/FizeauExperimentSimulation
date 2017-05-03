@@ -45,6 +45,9 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 	    System.out.println("błąd LF");
 	}
 	SwingUtilities.updateComponentTreeUI(Frame.this);
+	
+	setExtendedState(MAXIMIZED_BOTH); 
+	setUndecorated(false);
 
 	setPreferredSize(new Dimension(1200,900));
 	setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -68,12 +71,6 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 	this.timeMenu.setToolTipText("Zmień opcje czasu symulacji, by obserwować bieg promieni świetlnych");
 
 
-	this.chartMenu.addActionListener( new ActionListener() {
-	    @Override
-	    public void actionPerformed(ActionEvent e) {
-		Frame.this.bottom.graph.setVisible(true);
-	    }
-	} );
 
 
 	this.animation = new AnimationPanel(0,600,600);

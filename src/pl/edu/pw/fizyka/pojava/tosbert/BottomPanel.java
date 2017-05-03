@@ -17,7 +17,8 @@ public class BottomPanel extends JPanel { //Antonina Pater
     SettingsPanel settings;
     RunButtonPanel runButtonPanel;
     DetectorPanel detectorPanel;
-    GraphFrame graph;
+    GraphPanel graph;
+ //   GraphFrame graph;
 
 
     public BottomPanel() throws HeadlessException {
@@ -37,8 +38,9 @@ public class BottomPanel extends JPanel { //Antonina Pater
 	this.detectorPanel = new DetectorPanel();
 	this.add(this.detectorPanel);
 
-	this.graph = new GraphFrame();
-	this.graph.setLocation(getX()+800, (getY()));
+	this.graph = new GraphPanel();
+	this.add(graph);
+	//this.graph.setLocation(getX()+800, (getY()));
 	//this.graph.setVisible(true);
     }
 
