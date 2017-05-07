@@ -26,7 +26,7 @@ public class SliderListener implements ChangeListener {
 		while(vel>2*w0){
 			vel-=2*w0;
 		}
-		
+
 		double ratio = (double) vel/w0;
 
 		for(int ii = 0; ii < (double) 10000/w0; ii+=3 )

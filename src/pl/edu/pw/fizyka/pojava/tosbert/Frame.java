@@ -104,7 +104,7 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 		});
 
 	}
-	
+
 
 	void startAnimation(){
 		this.scheduler = Executors.newScheduledThreadPool(1);
@@ -137,9 +137,9 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 		this.scheduler.shutdown();
 		this.repaint();
 	}
-	
-	
-	
+
+
+
 }
 
 

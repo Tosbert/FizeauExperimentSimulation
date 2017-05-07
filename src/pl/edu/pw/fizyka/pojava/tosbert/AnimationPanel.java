@@ -184,14 +184,14 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 			}
 		}
 		else{
-			
+
 			int w0 = calculateW0(this);
-			
+
 			int tmp = animation.getVel();
 			while(tmp>2*w0){
 				tmp-=2*w0;
 			}
-			
+
 			if( tmp < w0 + 30 &&  tmp > w0 - 30 )
 				return true;
 		}

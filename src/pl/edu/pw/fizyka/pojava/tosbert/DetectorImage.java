@@ -23,7 +23,7 @@ public class DetectorImage extends JPanel { //Hubert Nowakowski
 
 	@Override
 	public void paintComponent(Graphics g ){
-		
+
 		Graphics2D g2d = (Graphics2D) g;
 
 
@@ -33,7 +33,7 @@ public class DetectorImage extends JPanel { //Hubert Nowakowski
 		g2d.setColor( new Color( 255, 255-Q , 255-Q));
 		g2d.drawOval(25,25, 50, 50);
 		g2d.fillOval(25,25, 50, 50);
-		
+
 	}
 
 	public void setQ(int Q){ this.Q = Q; } 
