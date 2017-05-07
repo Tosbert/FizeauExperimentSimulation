@@ -1,9 +1,13 @@
 package pl.edu.pw.fizyka.pojava.tosbert;
 
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -28,6 +32,9 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 	JMenu menu;
 	JMenuItem chartMenu;
 	JMenuItem timeMenu;
+
+	ScheduledExecutorService scheduler;
+
 
 	public Frame() throws HeadlessException {
 
@@ -97,4 +104,43 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 		});
 
 	}
+	
+
+	void startAnimation(){
+		this.scheduler = Executors.newScheduledThreadPool(1);
+		this.scheduler.scheduleAtFixedRate( (new Runnable() {
+			@Override
+			public void run(){
+
+				boolean rotate = false;
+				int lastToothY = Frame.this.animation.wheelTeeth.get(Frame.this.animation.wheelTeeth.size()-1).y;
+				for(WheelTooth t : Frame.this.animation.wheelTeeth)
+					if(lastToothY != t.moveTooth(Frame.this.animation.vel,lastToothY)) {
+						rotate = true;
+						lastToothY = t.moveTooth(Frame.this.animation.vel,lastToothY);
+					}
+				if(rotate)
+					Frame.this.animation.wheelTeeth.add(Frame.this.animation.wheelTeeth.remove(0));
+
+				SwingUtilities.invokeLater(new Runnable(){
+					@Override
+					public void run(){
+						Frame.this.repaint();
+					}
+				});
+			}
+		}),  0, 10, MILLISECONDS);
+	}
+
+	void stopAnimation(){
+		this.scheduler.shutdown();
+		this.repaint();
+	}
+	
+	
+	
 }
+
+
+
+

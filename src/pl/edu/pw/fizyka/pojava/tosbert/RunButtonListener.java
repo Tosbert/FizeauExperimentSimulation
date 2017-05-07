@@ -17,13 +17,13 @@ public class RunButtonListener implements ActionListener{
 			this.frame.animation.animationRunning = false;
 			System.out.println("Animation stopped.");
 			frame.bottom.runButtonPanel.runButton.setText("START");
-			this.frame.animation.stopAnimation();
+			this.frame.stopAnimation();
 		}
 		else{
 			this.frame.animation.animationRunning = true;
 			System.out.println("Animation started.");
 			frame.bottom.runButtonPanel.runButton.setText("STOP");
-			this.frame.animation.startAnimation();
+			this.frame.startAnimation();
 		}
 	}
 

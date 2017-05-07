@@ -1,7 +1,5 @@
 package pl.edu.pw.fizyka.pojava.tosbert;
 
-import static java.util.concurrent.TimeUnit.*;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -10,11 +8,8 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 public class AnimationPanel extends JPanel { // Hubert Nowakowski
 
@@ -28,8 +23,6 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 	int n;
 	int d;
 	int R;
-
-	ScheduledExecutorService scheduler;
 
 	Collection<Rectangle> movingObjects;
 	ArrayList<WheelTooth> wheelTeeth;
@@ -167,38 +160,6 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 
 	}
 
-	void startAnimation(){
-		this.scheduler = Executors.newScheduledThreadPool(1);
-		this.scheduler.scheduleAtFixedRate( (new Runnable() {
-			@Override
-			public void run(){
-
-				boolean rotate = false;
-				int lastToothY = AnimationPanel.this.wheelTeeth.get(AnimationPanel.this.wheelTeeth.size()-1).y;
-
-				for(WheelTooth t : AnimationPanel.this.wheelTeeth)
-					if(lastToothY != t.moveTooth(AnimationPanel.this.vel,lastToothY)) {
-						rotate = true;
-						lastToothY = t.moveTooth(AnimationPanel.this.vel,lastToothY);
-					}
-				if(rotate)
-					AnimationPanel.this.wheelTeeth.add(AnimationPanel.this.wheelTeeth.remove(0));
-
-				SwingUtilities.invokeLater(new Runnable(){
-					@Override
-					public void run(){
-						repaint();
-					}
-				});
-			}
-		}),  0, 10, MILLISECONDS);
-	}
-
-	void stopAnimation(){
-		this.scheduler.shutdown();
-		this.repaint();
-	}
-
 	void makeWheelTeeth(int height , AnimationPanel animation){
 
 		animation.wheelTeeth.clear();
@@ -223,14 +184,16 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 			}
 		}
 		else{
-			//takie oszukane
-			long c = 300000000;
-			int w0 =  (int) (c*Math.PI)/(2*animation.getD()*animation.getN()) ;
-			System.out.println(w0);
+			int w0 = calculateW0(this);
 			if( animation.getVel() < w0 + 3 &&   animation.getVel() > w0 - 3 )
 				return true;
 		}
 		return false;
+	}
+	
+	int calculateW0(AnimationPanel animation){
+		long c = 300000000;
+		return (int) (c*Math.PI)/(2*animation.getD()*animation.getN()) ;
 	}
 
 	public void setVel(int vel) { this.vel = vel; }
