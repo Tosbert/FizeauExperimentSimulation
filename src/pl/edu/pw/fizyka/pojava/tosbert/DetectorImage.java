@@ -13,12 +13,12 @@ public class DetectorImage extends JPanel { //Hubert Nowakowski
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	int intensity;
+	int Q; //intensity
 
 	public DetectorImage() {
 
 		setPreferredSize(new Dimension(101,101));
-		intensity = 0;
+		Q = 0;
 	}
 
 	@Override
@@ -30,11 +30,11 @@ public class DetectorImage extends JPanel { //Hubert Nowakowski
 		g2d.setColor(Color.LIGHT_GRAY);
 		g2d.drawRect(0, 0, 100,100);
 
-		g2d.setColor( new Color( 255, 255-intensity , 255-intensity));
+		g2d.setColor( new Color( 255, 255-Q , 255-Q));
 		g2d.drawOval(25,25, 50, 50);
 		g2d.fillOval(25,25, 50, 50);
 		
 	}
 
-	void setIntensity(int intensity) { this.intensity = intensity; } 
+	public void setQ(int Q){ this.Q = Q; } 
 }

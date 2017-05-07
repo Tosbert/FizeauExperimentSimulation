@@ -125,7 +125,8 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 				SwingUtilities.invokeLater(new Runnable(){
 					@Override
 					public void run(){
-						Frame.this.repaint();
+						Frame.this.animation.repaint();
+						Frame.this.bottom.detectorPanel.detectorImage.repaint();
 					}
 				});
 			}

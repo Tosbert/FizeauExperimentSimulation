@@ -90,7 +90,7 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 				(int)(this.wheel.getY()+this.wheel.getHeight()/2) -2  ,
 				(int) (this.fullMirror.getX()-(int)(this.lightReciever.getX()+(this.lightReciever.getWidth()/2))) , 3) 
 				);
-		
+
 		this.lightBeamToReciever = new Rectangle(
 				(int)(this.lightReciever.getX()+(this.lightReciever.getWidth()/2)),
 				(int)(this.wheel.getMaxY() + this.wheel.getY() )/2,
@@ -134,7 +134,7 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 		if( !detectCollision(this) )
 		{
 			g2d.setColor(Color.RED);
-			
+
 			for(Rectangle r : this.lightBeam){
 				g2d.draw(r);
 				g2d.fill(r);
@@ -142,7 +142,7 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 
 			g2d.fill(this.lightBeamToReciever);
 		}
-		
+
 		for(Rectangle r : this.movingObjects)
 			if(r.getClass()==WheelTooth.class){
 				g2d.setColor( Color.BLACK );
@@ -150,7 +150,7 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 				g2d.fill(r);
 			}
 
-		
+
 		g2d.setColor(Color.WHITE);
 		g2d.fill(new Rectangle((int)this.wheel.getX()-5,(int)(this.wheel.getY()+this.wheel.getHeight()),
 				(int)(this.wheel.getWidth())+10,getHeight() - (int)(this.wheel.getY()+this.wheel.getHeight()) ));
@@ -184,13 +184,20 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 			}
 		}
 		else{
+			
 			int w0 = calculateW0(this);
-			if( animation.getVel() < w0 + 3 &&   animation.getVel() > w0 - 3 )
+			
+			int tmp = animation.getVel();
+			while(tmp>2*w0){
+				tmp-=2*w0;
+			}
+			
+			if( tmp < w0 + 30 &&  tmp > w0 - 30 )
 				return true;
 		}
 		return false;
 	}
-	
+
 	int calculateW0(AnimationPanel animation){
 		long c = 300000000;
 		return (int) (c*Math.PI)/(2*animation.getD()*animation.getN()) ;
