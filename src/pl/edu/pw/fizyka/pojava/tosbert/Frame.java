@@ -65,6 +65,7 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 		this.chartMenu = new JMenuItem();
 		this.timeMenu = new JMenuItem();
 
+		/*
 		setJMenuBar(this.menuBar);
 		this.menuBar.add(this.menu);
 		this.menu.setText("Menu");
@@ -74,7 +75,7 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 		this.menu.add(this.timeMenu);
 		this.timeMenu.setText("Wybierz tempo symulacji");
 		this.timeMenu.setToolTipText("Zmień opcje czasu symulacji, by obserwować bieg promieni świetlnych");
-
+		 */
 
 
 
@@ -90,7 +91,7 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 		this.bottom.runButtonPanel.runButton.addActionListener(new RunButtonListener(this));
 		this.bottom.settings.velSlider.addChangeListener(new SliderListener(this));
 		this.bottom.settings.distance.addItemListener(new DistanceListener(this));
-		//this.bottom.settings.nTeeth.addItemListener(new ToothListener(this));
+		this.bottom.settings.nTeeth.addItemListener(new ToothListener(this));
 	}
 
 

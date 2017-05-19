@@ -9,14 +9,15 @@ public class ToothListener implements ItemListener{
 		this.frame = frame;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
 			int n = (Integer)e.getItemSelectable().getSelectedObjects()[0];
 
 			this.frame.animation.setN(n);
-			this.frame.animation.makeWheelTeeth( (int)(this.frame.animation.R * Math.PI/n) , frame.animation );
+			this.frame.animation.makeWheelTeeth( n );
+			
+			
 			this.frame.animation.repaint();
 		}
 	}

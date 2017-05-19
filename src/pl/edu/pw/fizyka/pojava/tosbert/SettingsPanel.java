@@ -53,7 +53,7 @@ public class SettingsPanel extends JPanel { //Antonina Pater, Hubert Nowakowski
 		c.anchor=GridBagConstraints.LINE_START;
 		this.teethLabel.setFont(this.mainFont);
 		this.add(this.teethLabel,c);
-		Integer[] teeth = {600, 500, 700, 800};
+		Integer[] teeth = {500, 600, 700, 720, 800, 1000};
 		this.nTeeth = new JComboBox<Integer>(teeth);
 		c.gridx = 2;
 		c.gridy = 1;
@@ -68,7 +68,7 @@ public class SettingsPanel extends JPanel { //Antonina Pater, Hubert Nowakowski
 		c.anchor=GridBagConstraints.LINE_START;
 		this.distanceLabel.setFont(this.mainFont);
 		this.add(this.distanceLabel,c);
-		Integer[] dist = {600, 500, 700, 800};
+		Integer[] dist = {500, 600, 700, 800 , 900, 1000};
 		this.distance = new JComboBox<Integer>(dist);
 		c.gridx = 2;
 		c.gridy = 2;

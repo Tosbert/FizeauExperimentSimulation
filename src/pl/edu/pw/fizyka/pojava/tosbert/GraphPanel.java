@@ -8,45 +8,101 @@ import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 public class GraphPanel extends JPanel {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
-	public GraphPanel() {
+    double[] data;
+    XYSeries series;
+    XYSeriesCollection dataset;
+    JFreeChart chart;
+    public GraphPanel() {
 
-		setLayout(new BorderLayout());
-		XYSeries series = new XYSeries("XYGraph");
-		series.add(1, 1);
-		series.add(2, 2);
-		series.add(3, 3);
-		series.add(4,4);
-		series.add(5,5);
+	setLayout(new BorderLayout());
+	setBackground(Color.WHITE);
+	
+	data = new double[401];
 
-		XYSeriesCollection dataset = new XYSeriesCollection();
-		dataset.addSeries(series);
-
-		JFreeChart chart = ChartFactory.createXYLineChart(
-				null, // Title
-				"t/ s", // x-axis Label
-				"ω/ rad", // y-axis Label
-				dataset, // Dataset
-				PlotOrientation.VERTICAL, 
-				false, // Show Legend
-				true, // Use tooltips
-				false // Configure chart to generate URLs?
-				);
-		chart.getPlot().setBackgroundPaint( Color.WHITE );
-		ChartPanel cp = new ChartPanel(chart);
-		cp.setBackground(Color.WHITE);
-
-		add(cp, BorderLayout.CENTER);
+	series = new XYSeries("XYGraph");
+	for(int i=0; i<data.length;i++){
+	    series.add(25*i , data[i]/255 );
 	}
+
+	dataset = new XYSeriesCollection();
+	dataset.addSeries(series);
+
+	
+	chart = ChartFactory.createScatterPlot(
+		null, // Title
+		"ω [rad/s]", // x-axis Label
+		"Q / Qmax", // y-axis Label
+		dataset, // Dataset
+		PlotOrientation.VERTICAL, 
+		false, // Show Legend
+		true, // Use tooltips
+		false // Configure chart to generate URLs?
+		);
+	chart.getPlot().setBackgroundPaint( Color.WHITE );
+	ChartPanel cp = new ChartPanel(chart);
+	cp.setBackground(Color.WHITE);
+
+	add(cp, BorderLayout.CENTER);
+	
+    }
+
+
+    public void setData(int x, int y){ data[x]= y; }
+
+    public void updateChart(double[] data) {
+
+	this.removeAll();
+	this.revalidate();
+
+	series = new XYSeries("XYGraph");
+	System.out.println("tesdt");
+	for(int i=0; i<data.length;i++){
+	    series.add(25*i , data[i]/255 );
+	    System.out.println(25*i +" " + data[i]/255 );
+	}
+
+	dataset = new XYSeriesCollection();
+	dataset.addSeries(series);
+
+	chart = ChartFactory.createScatterPlot(
+		null, // Title
+		"ω [rad/s]", // x-axis Label
+		"Q / Qmax", // y-axis Label
+		dataset, // Dataset
+		PlotOrientation.VERTICAL, 
+		false, // Show Legend
+		true, // Use tooltips
+		false // Configure chart to generate URLs?
+		);
+	chart.getPlot().setBackgroundPaint( Color.WHITE );
+	ChartPanel cp = new ChartPanel(chart);
+	cp.setBackground(Color.WHITE);
+
+	this.setLayout(new BorderLayout());
+	this.add(cp, BorderLayout.CENTER);
+	this.repaint();
+	/*
+	    jPanel_GraphicsTop.removeAll();
+	    jPanel_GraphicsTop.revalidate(); // This removes the old chart 
+	    aChart = createChart(); 
+	    aChart.removeLegend(); 
+	    ChartPanel chartPanel = new ChartPanel(aChart); 
+	    jPanel_GraphicsTop.setLayout(new BorderLayout()); 
+	    jPanel_GraphicsTop.add(chartPanel); 
+	    jPanel_GraphicsTop.repaint(); // This method makes the new chart appear
+	 */
+    }
 
 }

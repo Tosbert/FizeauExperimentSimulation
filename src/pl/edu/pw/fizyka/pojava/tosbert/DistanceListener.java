@@ -13,8 +13,10 @@ public class DistanceListener implements ItemListener{
 	public void itemStateChanged(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
 			int d = (Integer)e.getItemSelectable().getSelectedObjects()[0];
+			
 			this.frame.animation.setD(d);
 			this.frame.animation.fullMirror.x=(int)this.frame.animation.wheel.getX()+d;
+			this.frame.animation.makeLightBeam();
 
 			this.frame.animation.repaint();
 		}

@@ -18,6 +18,7 @@ public class DetectorImage extends JPanel { //Hubert Nowakowski
 	public DetectorImage() {
 
 		setPreferredSize(new Dimension(101,101));
+		setBackground(Color.WHITE);
 		Q = 0;
 	}
 
@@ -29,6 +30,8 @@ public class DetectorImage extends JPanel { //Hubert Nowakowski
 
 		g2d.setColor(Color.LIGHT_GRAY);
 		g2d.drawRect(0, 0, 100,100);
+		g2d.setColor(Color.WHITE);
+		g2d.fillRect(1, 1, 98,98);
 
 		g2d.setColor( new Color( 255, 255-Q , 255-Q));
 		g2d.drawOval(25,25, 50, 50);
