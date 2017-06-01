@@ -84,14 +84,14 @@ public class SettingsPanel extends JPanel { //Antonina Pater, Hubert Nowakowski
 		this.velSliderLabel.setFont(this.mainFont);
 		this.add(this.velSliderLabel,c);
 
-		this.velLabel = new JLabel("0");
+		this.velLabel = new JLabel("1000");
 		this.velLabel.setFont(this.mainFont);
 		c.gridx = 1;
 		c.gridy = 3;
 		c.anchor=GridBagConstraints.LINE_END;
 		this.add(this.velLabel,c);
 
-		this.velSlider = new JSlider(0,10000,0);
+		this.velSlider = new JSlider(0,10000,1000);
 		c.gridx = 0;
 		c.gridy = 4;
 		c.gridwidth = 3;
