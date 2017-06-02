@@ -15,21 +15,22 @@ public class RunButtonListener implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 	if(this.frame.animation.animationRunning) {
 	    this.frame.animation.animationRunning = false;
-	    System.out.println("Animation stopped.");
+	    //System.out.println("Animation stopped.");
 	    frame.bottom.runButtonPanel.runButton.setText("START");
 	    this.frame.stopAnimation();
 	}
 	else{
 	    this.frame.animation.animationRunning = true;
-	    System.out.println("Animation started.");
+	    //System.out.println("Animation started.");
 	    frame.bottom.runButtonPanel.runButton.setText("STOP");
 	    this.frame.startAnimation();
 	}
 
-
+	this.frame.animation.setVel(this.frame.bottom.settings.velSlider.getValue());
+	
 	int vel = this.frame.bottom.settings.velSlider.getValue();
 	int w0 = this.frame.animation.calculateW0(this.frame.animation);	
-	System.out.println(w0);
+	//System.out.println(w0);
 	int Qmax = 255;
 	int Q = 255;
 

@@ -18,6 +18,11 @@ public class DistanceListener implements ItemListener{
 	    this.frame.animation.fullMirror.x=(int)this.frame.animation.wheel.getX()+d;
 	    this.frame.animation.makeLightBeam();
 
+	    for(int ii=0; ii<this.frame.bottom.graph.data.length; ii++){
+		this.frame.bottom.graph.data[ii]=-1;
+	    }
+	    this.frame.bottom.graph.updateChart(this.frame.bottom.graph.data);
+
 	    this.frame.animation.repaint();
 
 

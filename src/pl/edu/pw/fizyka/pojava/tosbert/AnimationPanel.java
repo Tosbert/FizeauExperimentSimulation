@@ -34,12 +34,17 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
     Rectangle fullMirror;
     Rectangle partialMirror;
 
-    Rectangle lightBeamBeforeWheel; //always visible
+    Rectangle lightBeamBeforeWheel;
     Rectangle lightBeamToReciever;
+    
+    double height;
+    double width;
 
 
-    AnimationPanel(int vel ,int n ,int d){
+    AnimationPanel(int vel ,int n ,int d, double width, double height){
 	super();
+	
+	
 	this.vel=vel;
 	this.n=n;
 	this.d=d;
@@ -51,26 +56,25 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 
 	this.movingObjects = new ArrayList<Rectangle>();
 
-	this.wheel = new Rectangle( 250 , 60 , 11 , 200);
-
+	this.wheel = new ResizeableRectangle( 0.45 , 0.1, 0.007, 0.4, width, height );
+	
 	this.wheelTeeth = new ArrayList<WheelTooth>();
 
-	makeWheelTeeth( n);
+	makeWheelTeeth(n);
 
 	this.movingObjects.addAll(this.wheelTeeth);
 
 
-	this.fullMirror = new Rectangle( (int)(this.wheel.getX()+d) , (int)( this.wheel.getY()) ,15 , 200 );
+	this.fullMirror = new Rectangle( (int)(this.wheel.getX()+d) , (int)( this.wheel.getY()+this.wheel.getHeight()/4) ,15 , (int)(height*0.2) );
 
-	this.partialMirror = new Rectangle( (int)(this.wheel.getX()-50) , (int)( this.wheel.getY())-100 ,20 , 100 );
+	//this.partialMirror = new Rectangle( (int)(this.wheel.getX()-50) , (int)( this.wheel.getY())-100 ,20 , 100 );
 
-	this.lightSource = new Rectangle( 10 , ((int)( this.wheel.getMaxY() + this.wheel.getY() )/2) -15 ,40 , 30 );
-
-	this.lightReciever = new Rectangle(
-		(int)this.wheel.getX()-115,
-		(int)this.wheel.getY()+250,
-		30 , 45);
-
+	this.lightSource = new ResizeableRectangle( 0.01 , 0.280 , 0.03 , 0.035, width, height  );
+	
+	this.lightReciever = new ResizeableRectangle( 0.3 , 0.55 , 0.02 , 0.05, width, height  );
+	
+	
+	
 
 	this.lightBeamBeforeWheel = new Rectangle(
 		(int)this.lightSource.getX(),
@@ -84,7 +88,9 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 	this.lightBeamToReciever = new Rectangle(
 		(int)(this.lightReciever.getX()+(this.lightReciever.getWidth()/2)),
 		(int)(this.wheel.getMaxY() + this.wheel.getY() )/2,
-		4,150);
+		4,
+		(int)(this.lightReciever.getY()-this.lightSource.getY())
+		);
 
     }
 
@@ -105,23 +111,20 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 	g2d.draw(this.fullMirror);
 	g2d.fill(this.fullMirror);
 
+	/*
 	Path2D.Double path = new Path2D.Double();
 	path.append(this.partialMirror, false);
 	AffineTransform t = new AffineTransform();
 	t.rotate(Math.PI / 4);
 	path.transform(t);
 	g2d.fill(path);
-
+	*/
+	
+	
 	g2d.setColor(Color.RED);
 	g2d.fill(this.lightBeamBeforeWheel);
 
-	g2d.setColor(new Color(0,59,111));
-	g2d.draw(this.lightSource);
-	g2d.fill(this.lightSource);
-
-	g2d.setColor(new Color(0,59,111));
-	g2d.draw(this.lightReciever);
-	g2d.fill(this.lightReciever);
+	
 
 	if( !detectCollision(this) )
 	{
@@ -150,6 +153,13 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 	g2d.fill(new Rectangle((int)this.wheel.getX()-5,(int)this.wheel.getY()-100,
 		(int)(this.wheel.getWidth())+10,100));
 
+	g2d.setColor(new Color(0,59,111));
+	g2d.draw(this.lightSource);
+	g2d.fill(this.lightSource);
+
+	g2d.setColor(new Color(0,59,111));
+	g2d.draw(this.lightReciever);
+	g2d.fill(this.lightReciever);
 
     }
 

@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
+import java.awt.Toolkit;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -25,6 +26,9 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 
 
 
+	double WIDTH;
+	double HEIGHT;
+	
 	BottomPanel bottom;
 	AnimationPanel animation;
 
@@ -33,6 +37,8 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 	JMenuItem chartMenu;
 	JMenuItem timeMenu;
 
+	//Timer timer;
+	
 	ScheduledExecutorService scheduler;
 
 
@@ -50,6 +56,11 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 			System.out.println("błąd LF");
 		}
 		SwingUtilities.updateComponentTreeUI(Frame.this);
+		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		WIDTH = screenSize.getWidth();
+		HEIGHT = screenSize.getHeight();
+		
 
 		setExtendedState(MAXIMIZED_BOTH); 
 		setUndecorated(false);
@@ -79,7 +90,7 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 
 
 
-		this.animation = new AnimationPanel(0,600,600);
+		this.animation = new AnimationPanel(0,600,600,WIDTH,HEIGHT);
 
 
 		this.bottom = new BottomPanel();
