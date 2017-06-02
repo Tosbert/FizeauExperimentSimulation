@@ -61,7 +61,7 @@ public class SettingsPanel extends JPanel { //Antonina Pater, Hubert Nowakowski
 		this.nTeeth.setFont(this.mainFont);
 		this.add(this.nTeeth,c);
 
-		this.distanceLabel = new JLabel("Odległość od lustra: ");
+		this.distanceLabel = new JLabel("Odległość od lustra [m] : ");
 		c.gridx = 0;
 		c.gridy = 2;
 		c.insets = new Insets(2,0,0,0);
@@ -77,7 +77,7 @@ public class SettingsPanel extends JPanel { //Antonina Pater, Hubert Nowakowski
 		this.add(this.distance,c);
 
 
-		this.velSliderLabel = new JLabel("Prędkośc obrotu koła: ");
+		this.velSliderLabel = new JLabel("Prędkośc obrotu koła [rad/s] : ");
 		c.gridx = 0;
 		c.gridy = 3;
 		c.anchor=GridBagConstraints.LINE_START;

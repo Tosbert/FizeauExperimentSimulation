@@ -7,9 +7,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
+import java.io.File;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -36,6 +38,9 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 	JMenu menu;
 	JMenuItem chartMenu;
 	JMenuItem timeMenu;
+	
+	JFileChooser chooser;
+	File to;
 
 	//Timer timer;
 	
@@ -70,25 +75,7 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 		setBackground(Color.WHITE);
 		setLayout(new BorderLayout());
 
-
-		this.menuBar = new JMenuBar();
-		this.menu = new JMenu();
-		this.chartMenu = new JMenuItem();
-		this.timeMenu = new JMenuItem();
-
-		/*
-		setJMenuBar(this.menuBar);
-		this.menuBar.add(this.menu);
-		this.menu.setText("Menu");
-		this.menu.add(this.chartMenu);
-		this.chartMenu.setText("Pokaż wykres");
-		this.chartMenu.setToolTipText("Wyświetla okno z wykresem");
-		this.menu.add(this.timeMenu);
-		this.timeMenu.setText("Wybierz tempo symulacji");
-		this.timeMenu.setToolTipText("Zmień opcje czasu symulacji, by obserwować bieg promieni świetlnych");
-		 */
-
-
+		chooser = new JFileChooser();
 
 		this.animation = new AnimationPanel(0,500,5000,WIDTH,HEIGHT);
 
@@ -99,11 +86,14 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 		this.add(this.bottom, BorderLayout.SOUTH);
 		pack();
 
+		
+		
 		this.bottom.runButtonPanel.runButton.addActionListener(new RunButtonListener(this));
 		this.bottom.settings.velSlider.addChangeListener(new SliderListener(this));
 		this.bottom.runButtonPanel.fizeauButton.addActionListener(new FizeauButtonListener(this));
 		this.bottom.settings.distance.addItemListener(new DistanceListener(this));
 		this.bottom.settings.nTeeth.addItemListener(new ToothListener(this));
+		this.bottom.runButtonPanel.saveButton.addActionListener(new SaveButtonListener(this));
 	}
 
 
