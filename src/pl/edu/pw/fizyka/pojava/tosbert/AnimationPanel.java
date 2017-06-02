@@ -3,9 +3,8 @@ package pl.edu.pw.fizyka.pojava.tosbert;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Polygon;
 import java.awt.Rectangle;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Path2D;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -32,19 +31,19 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
     Rectangle lightSource;
     Rectangle lightReciever;
     Rectangle fullMirror;
-    Rectangle partialMirror;
+    Polygon partialMirror;
 
     Rectangle lightBeamBeforeWheel;
     Rectangle lightBeamToReciever;
-    
+
     double height;
     double width;
 
 
     AnimationPanel(int vel ,int n ,int d, double width, double height){
 	super();
-	
-	
+
+
 	this.vel=vel;
 	this.n=n;
 	this.d=d;
@@ -57,24 +56,23 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 	this.movingObjects = new ArrayList<Rectangle>();
 
 	this.wheel = new ResizeableRectangle( 0.45 , 0.1, 0.007, 0.4, width, height );
-	
+
 	this.wheelTeeth = new ArrayList<WheelTooth>();
 
 	makeWheelTeeth(n);
 
 	this.movingObjects.addAll(this.wheelTeeth);
 
+	int fullMirrorX = (int)(this.wheel.getX() + (width-this.wheel.getX()) *(d/15000.0) );
 
-	this.fullMirror = new Rectangle( (int)(this.wheel.getX()+d) , (int)( this.wheel.getY()+this.wheel.getHeight()/4) ,15 , (int)(height*0.2) );
-
-	//this.partialMirror = new Rectangle( (int)(this.wheel.getX()-50) , (int)( this.wheel.getY())-100 ,20 , 100 );
+	this.fullMirror = new Rectangle( fullMirrorX , (int)( this.wheel.getY()+this.wheel.getHeight()/4) ,15 , (int)(height*0.2) );
 
 	this.lightSource = new ResizeableRectangle( 0.01 , 0.280 , 0.03 , 0.035, width, height  );
-	
+
 	this.lightReciever = new ResizeableRectangle( 0.3 , 0.55 , 0.02 , 0.05, width, height  );
-	
-	
-	
+
+
+
 
 	this.lightBeamBeforeWheel = new Rectangle(
 		(int)this.lightSource.getX(),
@@ -91,6 +89,22 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 		4,
 		(int)(this.lightReciever.getY()-this.lightSource.getY())
 		);
+	
+	 int partialMirrorTopHeight = (int)( this.lightSource.getY()-height*0.08 );
+	
+	 int xPoly[] = {(int)( this.lightReciever.getX()+width*0.03 ) ,(int)( this.lightReciever.getX()-width*0.03 ) ,(int)( this.lightReciever.getX()-width*0.02 ),(int)( this.lightReciever.getX()+width*0.04 )};
+	 int yPoly[] = {partialMirrorTopHeight ,partialMirrorTopHeight + (int)(height*0.2) ,partialMirrorTopHeight + (int)(height*0.2),partialMirrorTopHeight};
+
+
+	
+	/*
+	int xPoly[] = { (int)( this.lightReciever.getX()+width*0.05 ),(int)( this.lightReciever.getX()-width*0.1 ),(int)( this.lightReciever.getX()+width*0.05 ),(int)( this.lightReciever.getX()-width*0.1 )};
+	int yPoly[] = {(int)( this.lightSource.getY()-height*0.15 ),(int)( this.lightSource.getY()+height*0.15 ),(int)( this.lightSource.getY()-height*0.15 ),(int)( this.lightSource.getY()+height*0.15 )};
+	
+	*/
+	this.partialMirror = new Polygon(xPoly, yPoly, xPoly.length);
+	//this.partialMirror = new Rectangle( (int)(this.wheel.getX()-50) , (int)( this.wheel.getY())-100 ,20 , 100 );
+
 
     }
 
@@ -111,20 +125,14 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 	g2d.draw(this.fullMirror);
 	g2d.fill(this.fullMirror);
 
-	/*
-	Path2D.Double path = new Path2D.Double();
-	path.append(this.partialMirror, false);
-	AffineTransform t = new AffineTransform();
-	t.rotate(Math.PI / 4);
-	path.transform(t);
-	g2d.fill(path);
-	*/
-	
-	
+	g2d.draw(this.partialMirror);
+	g2d.fill(this.partialMirror);
+
+
 	g2d.setColor(Color.RED);
 	g2d.fill(this.lightBeamBeforeWheel);
 
-	
+
 
 	if( !detectCollision(this) )
 	{
@@ -138,7 +146,7 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 	    g2d.fill(this.lightBeamToReciever);
 	}
 
-	
+
 	g2d.setColor( Color.BLACK );
 	for(Rectangle r : this.wheelTeeth)
 	{
