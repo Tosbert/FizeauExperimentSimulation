@@ -14,7 +14,7 @@ public class FizeauButtonListener implements ActionListener{	//Antonina Pater
     public void actionPerformed(ActionEvent arg0) {
 	frame.bottom.settings.nTeeth.setSelectedItem(720);
 	frame.bottom.settings.distance.setSelectedItem(8633);
-	frame.bottom.settings.velSlider.setValue(225);
+	frame.bottom.settings.velSlider.setValue(75);
 	
 	for(int ii=0; ii<this.frame.bottom.graph.data.length; ii++){
 	    this.frame.bottom.graph.data[ii]=-1;
