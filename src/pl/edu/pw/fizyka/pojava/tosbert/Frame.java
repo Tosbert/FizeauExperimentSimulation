@@ -101,6 +101,7 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 
 		this.bottom.runButtonPanel.runButton.addActionListener(new RunButtonListener(this));
 		this.bottom.settings.velSlider.addChangeListener(new SliderListener(this));
+		this.bottom.runButtonPanel.fizeauButton.addActionListener(new FizeauButtonListener(this));
 		this.bottom.settings.distance.addItemListener(new DistanceListener(this));
 		this.bottom.settings.nTeeth.addItemListener(new ToothListener(this));
 	}
