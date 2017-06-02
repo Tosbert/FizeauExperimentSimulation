@@ -2,9 +2,7 @@ package pl.edu.pw.fizyka.pojava.tosbert;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
 import javax.swing.JFileChooser;
@@ -34,7 +32,7 @@ public class SaveButtonListener implements ActionListener{ //Antonina Pater
 			//		notes.write(writer);
 
 			PrintWriter pr = new PrintWriter(frame.to); 
-			
+
 			pr.println("n: "+ this.frame.bottom.settings.nTeeth.getSelectedItem());
 			pr.println("d[m]: "+ this.frame.bottom.settings.distance.getSelectedItem());
 			pr.println("w[rad/s] \t Q/Qmax");

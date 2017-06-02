@@ -41,11 +41,11 @@ public class RunButtonPanel extends JPanel { //Antonina Pater
 		c.gridx = 0;
 		c.gridy = 1;
 		c.insets = new Insets(10,0,0,0);
-	//	c.anchor=GridBagConstraints.PAGE_END;
+		//	c.anchor=GridBagConstraints.PAGE_END;
 		this.runButton.setFont(this.mainFont);
 		this.runButton.setPreferredSize(new Dimension(200, 35));
 		this.add(this.runButton,c);
-		
+
 		this.saveButton = new JButton("Zapisz do pliku tekstowego");
 		c.gridy = 2;
 		this.saveButton.setFont(mainFont);

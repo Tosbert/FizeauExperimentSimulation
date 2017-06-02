@@ -42,12 +42,12 @@ public class SliderListener implements ChangeListener {
 		}
 		int y = Q;		
 		this.frame.bottom.detectorPanel.detectorImage.setQ(Q);
-		
+
 		if(this.frame.animation.animationRunning){
-		    this.frame.bottom.graph.setData(x,y);
-		    this.frame.bottom.graph.updateChart(this.frame.bottom.graph.data);
+			this.frame.bottom.graph.setData(x,y);
+			this.frame.bottom.graph.updateChart(this.frame.bottom.graph.data);
 		}
-		
+
 	}
 
 }

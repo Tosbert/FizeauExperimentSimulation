@@ -30,7 +30,7 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 
 	double WIDTH;
 	double HEIGHT;
-	
+
 	BottomPanel bottom;
 	AnimationPanel animation;
 
@@ -38,12 +38,12 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 	JMenu menu;
 	JMenuItem chartMenu;
 	JMenuItem timeMenu;
-	
+
 	JFileChooser chooser;
 	File to;
 
 	//Timer timer;
-	
+
 	ScheduledExecutorService scheduler;
 
 
@@ -61,11 +61,11 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 			System.out.println("błąd LF");
 		}
 		SwingUtilities.updateComponentTreeUI(Frame.this);
-		
+
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		WIDTH = screenSize.getWidth();
 		HEIGHT = screenSize.getHeight();
-		
+
 
 		setExtendedState(MAXIMIZED_BOTH); 
 		setUndecorated(false);
@@ -86,8 +86,8 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 		this.add(this.bottom, BorderLayout.SOUTH);
 		pack();
 
-		
-		
+
+
 		this.bottom.runButtonPanel.runButton.addActionListener(new RunButtonListener(this));
 		this.bottom.settings.velSlider.addChangeListener(new SliderListener(this));
 		this.bottom.runButtonPanel.fizeauButton.addActionListener(new FizeauButtonListener(this));
