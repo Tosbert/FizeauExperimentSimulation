@@ -220,7 +220,7 @@ public class AnimationPanel extends JPanel { // Hubert Nowakowski
 		tmp-=2*w0;
 	    }
 
-	    if( tmp < w0 + 25 &&  tmp > w0 - 25 )
+	    if( tmp < w0 + 5 &&  tmp > w0 - 5 )
 		return true;
 	}
 	return false;
