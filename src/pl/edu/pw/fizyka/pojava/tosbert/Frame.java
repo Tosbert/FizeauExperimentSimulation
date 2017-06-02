@@ -64,8 +64,8 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 
 		setExtendedState(MAXIMIZED_BOTH); 
 		setUndecorated(false);
-
-		setPreferredSize(new Dimension(1200,900));
+		setPreferredSize(new Dimension((int)WIDTH,(int)HEIGHT));
+		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBackground(Color.WHITE);
 		setLayout(new BorderLayout());
@@ -90,7 +90,7 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 
 
 
-		this.animation = new AnimationPanel(0,600,600,WIDTH,HEIGHT);
+		this.animation = new AnimationPanel(0,500,5000,WIDTH,HEIGHT);
 
 
 		this.bottom = new BottomPanel();

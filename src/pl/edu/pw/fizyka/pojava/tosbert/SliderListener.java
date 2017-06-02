@@ -19,24 +19,23 @@ public class SliderListener implements ChangeListener {
 		this.frame.animation.setVel(this.frame.bottom.settings.velSlider.getValue());
 
 		int w0 = this.frame.animation.calculateW0(this.frame.animation);	
-		System.out.println(w0);
 		int Qmax = 255;
 		int Q = 255;
 
-		int x = (int) (vel/ 25.0);
+		int x = (int) (vel/ 5.0);
 		while(vel>2*w0){
 			vel-=2*w0;
 		}
 
 		double ratio = (double) vel/w0;
 
-		for(int ii = 0; ii < (double) 10000/w0; ii+=3 )
+		for(int ii = 0; ii < (int)(2000/w0); ii+=3 )
 		{
-			if( (vel > w0*ii ) &&( vel < w0*(ii+1) ) ){
+			if( (vel >= w0*ii ) &&( vel <= w0*(ii+1) ) ){
 				Q = (int) (Qmax * ( 1 - ratio ));
 				break;
 			}
-			if( vel > w0*(ii+1) && vel < w0*(ii+2) ){
+			if( vel >= w0*(ii+1) && vel <= w0*(ii+2) ){
 				Q = (int)(Qmax * ( ratio - 1) );
 				break;
 			}

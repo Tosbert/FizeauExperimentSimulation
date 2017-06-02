@@ -68,7 +68,7 @@ public class SettingsPanel extends JPanel { //Antonina Pater, Hubert Nowakowski
 		c.anchor=GridBagConstraints.LINE_START;
 		this.distanceLabel.setFont(this.mainFont);
 		this.add(this.distanceLabel,c);
-		Integer[] dist = {500, 600, 700, 800 , 900, 1000};
+		Integer[] dist = {5000, 6000, 7000, 8000, 8633 , 9000, 10000};
 		this.distance = new JComboBox<Integer>(dist);
 		c.gridx = 2;
 		c.gridy = 2;
@@ -84,14 +84,14 @@ public class SettingsPanel extends JPanel { //Antonina Pater, Hubert Nowakowski
 		this.velSliderLabel.setFont(this.mainFont);
 		this.add(this.velSliderLabel,c);
 
-		this.velLabel = new JLabel("1000");
+		this.velLabel = new JLabel("200");
 		this.velLabel.setFont(this.mainFont);
 		c.gridx = 1;
 		c.gridy = 3;
 		c.anchor=GridBagConstraints.LINE_END;
 		this.add(this.velLabel,c);
 
-		this.velSlider = new JSlider(0,10000,1000);
+		this.velSlider = new JSlider(0,2000,200);
 		c.gridx = 0;
 		c.gridy = 4;
 		c.gridwidth = 3;
@@ -101,7 +101,7 @@ public class SettingsPanel extends JPanel { //Antonina Pater, Hubert Nowakowski
 
 		this.velSlider.setBackground(Color.WHITE);
 
-		this.velSlider.setMajorTickSpacing(25);
+		this.velSlider.setMajorTickSpacing(5);
 		this.velSlider.setSnapToTicks(true);
 		this.add(this.velSlider,c);
 
