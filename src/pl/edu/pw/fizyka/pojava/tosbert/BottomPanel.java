@@ -7,25 +7,22 @@ import java.awt.HeadlessException;
 
 import javax.swing.JPanel;
 
-public class BottomPanel extends JPanel { //Antonina Pater
+public class BottomPanel extends JPanel { 
 
-	/**
-	 *
+	/** Antonina Pater
+	 * Dolny panel programu.
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	SettingsPanel settings;
 	RunButtonPanel runButtonPanel;
 	DetectorPanel detectorPanel;
 	GraphPanel graph;
-	//   GraphFrame graph;
-
-
+	
 	public BottomPanel() throws HeadlessException {
 		setBackground(Color.WHITE);
 
 		setLayout(new GridLayout(1,3,3,3));
-
 
 		setPreferredSize(new Dimension(800,130));
 
@@ -40,8 +37,6 @@ public class BottomPanel extends JPanel { //Antonina Pater
 
 		this.graph = new GraphPanel();
 		this.add(graph);
-		//this.graph.setLocation(getX()+800, (getY()));
-		//this.graph.setVisible(true);
 	}
 
 

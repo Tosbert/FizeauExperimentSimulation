@@ -10,10 +10,12 @@ import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class DetectorPanel extends JPanel { // Hubert Nowakowski, Antonina Pater
+public class DetectorPanel extends JPanel { 
 	/**
-	 *
+	 * Hubert Nowakowski, Antonina Pater
+	 * Panel zawierający obraz detektora światła.
 	 */
+
 	private static final long serialVersionUID = 1L;
 
 	DetectorImage detectorImage;
@@ -35,10 +37,8 @@ public class DetectorPanel extends JPanel { // Hubert Nowakowski, Antonina Pater
 		this.add(this.detectorLabel,c);
 
 		this.detectorImage = new DetectorImage();
-		c.gridx = 0;
 		c.gridy = 1;
 		c.insets = new Insets(5,0,5,0);
-		c.anchor=GridBagConstraints.PAGE_START;
 		this.add(this.detectorImage,c);
 
 	}

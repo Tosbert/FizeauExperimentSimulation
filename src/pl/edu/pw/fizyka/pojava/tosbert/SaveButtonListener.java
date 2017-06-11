@@ -7,7 +7,12 @@ import java.io.PrintWriter;
 
 import javax.swing.JFileChooser;
 
-public class SaveButtonListener implements ActionListener{ //Antonina Pater
+public class SaveButtonListener implements ActionListener{ 
+
+	/**
+	 * Antonina Pater
+	 * ActionListener do zapisu danych do pliku tekstowego.
+	 */
 
 	Frame frame;
 
@@ -19,18 +24,14 @@ public class SaveButtonListener implements ActionListener{ //Antonina Pater
 	public void actionPerformed(ActionEvent e) {
 		try {
 
-			frame.chooser.setDialogTitle("Wybierz miejsce gdzie zapisaÄ‡ plik.");
+			frame.chooser.setDialogTitle("Wybierz miejsce gdzie zapisać plik.");
 
 			int result = frame.chooser.showSaveDialog(null);
 			if (result != JFileChooser.APPROVE_OPTION){
 				return;
 			}
 			frame.to = frame.chooser.getSelectedFile();
-			//		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(frame.to), "UTF-8") );
-
-			//		FileWriter writer = new FileWriter(frame.to);
-			//		notes.write(writer);
-
+			
 			PrintWriter pr = new PrintWriter(frame.to); 
 
 			pr.println("n: "+ this.frame.bottom.settings.nTeeth.getSelectedItem());

@@ -4,8 +4,9 @@ import java.awt.Rectangle;
 
 public class WheelTooth extends Rectangle {
 
-	/**
-	 *
+	/** 
+	 * Hubert Nowakowski
+	 * Klasa obsługująca zęby koła.
 	 */
 	private static final long serialVersionUID = 1L;
 

@@ -3,7 +3,11 @@ package pl.edu.pw.fizyka.pojava.tosbert;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class FizeauButtonListener implements ActionListener{	//Antonina Pater
+public class FizeauButtonListener implements ActionListener{	
+	/**
+	 * Antonina Pater
+	 * ActionListener ustawiający parametry takiej jak w ogryginalnym eksperymencie.
+	 */
 
 	Frame frame;
 	public FizeauButtonListener(Frame frame) {
@@ -16,9 +20,7 @@ public class FizeauButtonListener implements ActionListener{	//Antonina Pater
 		frame.bottom.settings.distance.setSelectedItem(8633);
 		frame.bottom.settings.velSlider.setValue(75);
 
-		for(int ii=0; ii<this.frame.bottom.graph.data.length; ii++){
-			this.frame.bottom.graph.data[ii]=-1;
-		}
+		this.frame.bottom.graph.clearData();
 		this.frame.bottom.graph.updateChart(this.frame.bottom.graph.data);
 
 		this.frame.animation.repaint();

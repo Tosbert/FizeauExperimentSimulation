@@ -2,10 +2,11 @@ package pl.edu.pw.fizyka.pojava.tosbert;
 
 import java.awt.Rectangle;
 
-public class ResizeableRectangle extends Rectangle {
+public class ResizeableRectangle extends Rectangle { 
 
 	/**
-	 * 
+	 * Hubert Nowakowski
+	 * Klasa tworząca prostokąty zależne procentowo od szerokości i wyskokości ekranu urzytkownika.
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -17,7 +18,5 @@ public class ResizeableRectangle extends Rectangle {
 				(int)(heightPercent*height)
 				);
 	}
-
-
 
 }

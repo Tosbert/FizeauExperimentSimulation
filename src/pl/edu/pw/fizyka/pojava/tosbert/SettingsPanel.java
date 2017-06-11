@@ -12,13 +12,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 
-public class SettingsPanel extends JPanel { //Antonina Pater, Hubert Nowakowski
-	/**
-	 *
+public class SettingsPanel extends JPanel { 
+
+	/** Antonina Pater, Hubert Nowakowski
+	 * Panel ustawień parametrów animacji.
 	 */
 	private static final long serialVersionUID = 1L;
-
-
 
 	JLabel settingsLabel;
 	JComboBox<Integer> nTeeth;
@@ -48,7 +47,6 @@ public class SettingsPanel extends JPanel { //Antonina Pater, Hubert Nowakowski
 		this.add(this.settingsLabel,c);
 
 		this.teethLabel = new JLabel("Liczba ząbków: ");
-		c.gridx = 0;
 		c.gridy = 1;
 		c.anchor=GridBagConstraints.LINE_START;
 		this.teethLabel.setFont(this.mainFont);
@@ -71,7 +69,6 @@ public class SettingsPanel extends JPanel { //Antonina Pater, Hubert Nowakowski
 		Integer[] dist = {5000, 6000, 7000, 8000, 8633 , 9000, 10000};
 		this.distance = new JComboBox<Integer>(dist);
 		c.gridx = 2;
-		c.gridy = 2;
 		c.anchor=GridBagConstraints.LINE_END;
 		this.distance.setFont(this.mainFont);
 		this.add(this.distance,c);
@@ -87,7 +84,6 @@ public class SettingsPanel extends JPanel { //Antonina Pater, Hubert Nowakowski
 		this.velLabel = new JLabel("200");
 		this.velLabel.setFont(this.mainFont);
 		c.gridx = 1;
-		c.gridy = 3;
 		c.anchor=GridBagConstraints.LINE_END;
 		this.add(this.velLabel,c);
 
@@ -104,10 +100,6 @@ public class SettingsPanel extends JPanel { //Antonina Pater, Hubert Nowakowski
 		this.velSlider.setMajorTickSpacing(5);
 		this.velSlider.setSnapToTicks(true);
 		this.add(this.velSlider,c);
-
-
 	}
-
-
 
 }

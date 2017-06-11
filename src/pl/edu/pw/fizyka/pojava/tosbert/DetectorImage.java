@@ -9,17 +9,17 @@ import javax.swing.JPanel;
 
 public class DetectorImage extends JPanel { //Hubert Nowakowski
 
-	/**
-	 *
+	/** Hubert Nowakowski
+	 * Panel wyświetlający odczyt intensywności światła z detektora.
 	 */
 	private static final long serialVersionUID = 1L;
-	int Q; //intensity
+	int Intensity; 
 
 	public DetectorImage() {
 
 		setPreferredSize(new Dimension(101,101));
 		setBackground(Color.WHITE);
-		Q = 0;
+		Intensity = 0;
 	}
 
 	@Override
@@ -27,17 +27,16 @@ public class DetectorImage extends JPanel { //Hubert Nowakowski
 
 		Graphics2D g2d = (Graphics2D) g;
 
-
 		g2d.setColor(Color.LIGHT_GRAY);
 		g2d.drawRect(0, 0, 100,100);
 		g2d.setColor(Color.WHITE);
 		g2d.fillRect(1, 1, 98,98);
 
-		g2d.setColor( new Color( 255, 255-Q , 255-Q));
+		g2d.setColor( new Color( 255, 255-Intensity , 255-Intensity));
 		g2d.drawOval(25,25, 50, 50);
 		g2d.fillOval(25,25, 50, 50);
 
 	}
 
-	public void setQ(int Q){ this.Q = Q; } 
+	public void setIntensity(int Intensity){ this.Intensity = Intensity; } 
 }
