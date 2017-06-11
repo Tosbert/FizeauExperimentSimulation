@@ -1,32 +1,28 @@
 package pl.edu.pw.fizyka.pojava.tosbert;
 
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 
-public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
+public class Frame extends JFrame { 
 
 	/**
-	 *
+	 * Antonina Pater, Hubert Nowakowski
+	 * Główna klasa programu zawierająca funkcje main()
+	 * Ustawia wymiary ramki, Look&Feel oraz pętle animacji.
 	 */
 	private static final long serialVersionUID = 1L;
-
-
 
 	double WIDTH;
 	double HEIGHT;
@@ -34,18 +30,10 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 	BottomPanel bottom;
 	AnimationPanel animation;
 
-	JMenuBar menuBar;
-	JMenu menu;
-	JMenuItem chartMenu;
-	JMenuItem timeMenu;
-
 	JFileChooser chooser;
 	File to;
 
-	//Timer timer;
-
-	ScheduledExecutorService scheduler;
-
+	Timer timer;
 
 	public Frame() throws HeadlessException {
 
@@ -66,27 +54,22 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 		WIDTH = screenSize.getWidth();
 		HEIGHT = screenSize.getHeight();
 
-
 		setExtendedState(MAXIMIZED_BOTH); 
 		setUndecorated(false);
 		setPreferredSize(new Dimension((int)WIDTH,(int)HEIGHT));
-		setResizable(false);
+		//setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBackground(Color.WHITE);
 		setLayout(new BorderLayout());
 
 		chooser = new JFileChooser();
 
-		this.animation = new AnimationPanel(0,500,5000,WIDTH,HEIGHT);
-
-
+		this.animation = new AnimationPanel(200,500,5000,WIDTH,HEIGHT);
 		this.bottom = new BottomPanel();
 
 		this.add(this.animation, BorderLayout.CENTER);
 		this.add(this.bottom, BorderLayout.SOUTH);
 		pack();
-
-
 
 		this.bottom.runButtonPanel.runButton.addActionListener(new RunButtonListener(this));
 		this.bottom.settings.velSlider.addChangeListener(new SliderListener(this));
@@ -110,35 +93,75 @@ public class Frame extends JFrame { //Antonina Pater, Hubert Nowakowski
 
 
 	void startAnimation(){
-		this.scheduler = Executors.newScheduledThreadPool(1);
-		this.scheduler.scheduleAtFixedRate( (new Runnable() {
+
+		int delay = 10;
+		final Timer timer = new Timer(delay, null);
+		timer.addActionListener(new ActionListener() {
 			@Override
-			public void run(){
+			public void actionPerformed(ActionEvent e) {
 
-				boolean rotate = false;
-				int lastToothY = Frame.this.animation.wheelTeeth.get(Frame.this.animation.wheelTeeth.size()-1).y;
-				for(WheelTooth t : Frame.this.animation.wheelTeeth)
-					if(lastToothY != t.moveTooth(Frame.this.animation.vel,lastToothY)) {
-						rotate = true;
-						lastToothY = t.moveTooth(Frame.this.animation.vel,lastToothY);
+				if(!animation.animationRunning){
+					timer.stop();
+				}
+				else
+				{
+					boolean rotate = false;
+					int lastToothY = Frame.this.animation.wheelTeeth.get(Frame.this.animation.wheelTeeth.size()-1).y;
+					for(WheelTooth t : Frame.this.animation.wheelTeeth)
+						if(lastToothY != t.moveTooth(Frame.this.animation.vel,lastToothY)) {
+							rotate = true;
+							lastToothY = t.moveTooth(Frame.this.animation.vel,lastToothY);
+						}
+					if(rotate){
+						Frame.this.animation.wheelTeeth.add(Frame.this.animation.wheelTeeth.remove(0));
 					}
-				if(rotate)
-					Frame.this.animation.wheelTeeth.add(Frame.this.animation.wheelTeeth.remove(0));
 
-				SwingUtilities.invokeLater(new Runnable(){
-					@Override
-					public void run(){
-						Frame.this.animation.repaint();
-						Frame.this.bottom.detectorPanel.detectorImage.repaint();
-					}
-				});
+					SwingUtilities.invokeLater(new Runnable(){
+						@Override
+						public void run(){
+							Frame.this.animation.repaint();
+							Frame.this.bottom.detectorPanel.detectorImage.repaint();
+						}
+					});
+				}
+
 			}
-		}),  0, 10, MILLISECONDS);
+		});
+
+		if(!timer.isRunning()) { timer.start(); }
 	}
 
-	void stopAnimation(){
-		this.scheduler.shutdown();
-		this.repaint();
+	void updateAnimation(){
+		int vel = Frame.this.bottom.settings.velSlider.getValue();
+		Frame.this.bottom.settings.velLabel.setText( Integer.toString(vel) );
+		Frame.this.animation.setVel(vel);
+
+		int w0 = Frame.this.animation.calculateW0(Frame.this.animation);	
+		int IntensityMax = 255;
+		int Intensity = IntensityMax;
+
+		int x = (int) (vel/ 5.0);
+
+		while(vel>2*w0){
+			vel-=2*w0;
+		}
+		double ratio = (double) vel/w0;
+
+		if( (vel >= 0 ) &&( vel <= w0) ){
+			Intensity = (int) (IntensityMax * ( 1 - ratio ));
+
+		}
+		if( vel >= w0 && vel <= w0*2 ){
+			Intensity = (int)(IntensityMax * ( ratio - 1) );
+		}
+		
+		int y = Intensity;		
+		Frame.this.bottom.detectorPanel.detectorImage.setIntensity(Intensity);
+
+		if(Frame.this.animation.animationRunning){
+			Frame.this.bottom.graph.setData(x,y);
+			Frame.this.bottom.graph.updateChart(Frame.this.bottom.graph.data);
+		}
 	}
 
 

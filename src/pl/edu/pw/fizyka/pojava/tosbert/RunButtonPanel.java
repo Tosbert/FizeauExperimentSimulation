@@ -10,9 +10,11 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class RunButtonPanel extends JPanel { //Antonina Pater
+public class RunButtonPanel extends JPanel { 
 	/**
-	 *
+	 * Antonina Pater
+	 * Panel który zawiera przyciski włączenia/wyłączenia animacji, zmiany usawień
+	 * animacji na parametry oryginalnego eksperymentu oraz zapisu danych do pliku tekstowego.
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -38,10 +40,8 @@ public class RunButtonPanel extends JPanel { //Antonina Pater
 		this.add(this.fizeauButton,c);
 
 		this.runButton = new JButton ("START/ STOP");
-		c.gridx = 0;
 		c.gridy = 1;
 		c.insets = new Insets(10,0,0,0);
-		//	c.anchor=GridBagConstraints.PAGE_END;
 		this.runButton.setFont(this.mainFont);
 		this.runButton.setPreferredSize(new Dimension(200, 35));
 		this.add(this.runButton,c);
@@ -52,7 +52,4 @@ public class RunButtonPanel extends JPanel { //Antonina Pater
 		this.saveButton.setPreferredSize(new Dimension(200, 35));
 		this.add(saveButton,c); 
 	}
-
-
-
 }
