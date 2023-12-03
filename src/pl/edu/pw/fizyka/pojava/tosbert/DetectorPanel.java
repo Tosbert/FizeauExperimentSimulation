@@ -29,7 +29,7 @@ public class DetectorPanel extends JPanel {
 		setPreferredSize(new Dimension(250,130));
 		setBackground(Color.WHITE);
 
-		this.detectorLabel= new JLabel("OBRAZ DETEKTORA");
+		this.detectorLabel= new JLabel("DETECTOR IMAGE");
 		c.gridx = 0;
 		c.gridy = 0;
 		c.anchor=GridBagConstraints.PAGE_START;
